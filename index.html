@@ -6,9 +6,9 @@
 <title>Money Defense</title>
 <style>
 :root{
-  --bg:#0d1611;--panel:#14211a;--panel2:#1b2c22;--line:#2b4535;
-  --gold:#f5c542;--gold2:#d99a12;--green:#3ddc84;--red:#ff5d5d;
-  --text:#e9f2ec;--mute:#8fa597;--cyan:#6fd6ff;--purple:#b48cff;
+  --bg:#0c1410;--panel:#14211a;--panel2:#1b2c22;--line:#2b4535;
+  --gold:#f5c542;--wood:#c98b4a;--green:#3ddc84;--red:#ff5d5d;
+  --text:#e9f2ec;--mute:#8fa597;--cyan:#6fd6ff;--pink:#ff8fd0;
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--text);
@@ -18,13 +18,13 @@ button{font-family:inherit;cursor:pointer}
 .screen.on{display:flex}
 
 /* ---------- 메인 ---------- */
-#menu{flex-direction:column;align-items:center;justify-content:center;gap:22px;
-  background:radial-gradient(ellipse at 50% 40%,#1f4430 0%,#0d1611 70%)}
-.logo{font-size:64px;font-weight:900;letter-spacing:2px;
+#menu{flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:16px;
+  background:radial-gradient(ellipse at 50% 40%,#1f4430 0%,#0c1410 70%)}
+.logo{font-size:60px;font-weight:900;letter-spacing:2px;text-align:center;
   background:linear-gradient(180deg,#ffe58a,#f5c542 45%,#c8860d);-webkit-background-clip:text;
   background-clip:text;color:transparent;filter:drop-shadow(0 4px 0 #5a3d05)}
-.sub{color:var(--mute);margin-top:-14px;font-size:17px}
-.mstats{display:flex;gap:14px}
+.sub{color:var(--mute);margin-top:-12px;font-size:16px}
+.mstats{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 .mstat{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 18px;text-align:center;min-width:110px}
 .mstat b{display:block;font-size:22px;color:var(--gold)}
 .mstat span{font-size:12px;color:var(--mute)}
@@ -33,41 +33,36 @@ button{font-family:inherit;cursor:pointer}
 .big.go{background:linear-gradient(180deg,#ffd75e,#e0a51c);color:#3b2600;box-shadow:0 5px 0 #8a5d05}
 .big.shop{background:var(--panel2);color:var(--text);border:1px solid var(--line);box-shadow:0 5px 0 #08100c}
 .big:active{transform:translateY(3px);box-shadow:none}
-.howto{max-width:560px;background:rgba(20,33,26,.8);border:1px solid var(--line);border-radius:12px;
-  padding:12px 18px;font-size:13.5px;line-height:1.7;color:#c9d8ce}
+.howto{max-width:600px;background:rgba(20,33,26,.85);border:1px solid var(--line);border-radius:12px;
+  padding:12px 18px;font-size:13.5px;line-height:1.75;color:#c9d8ce}
 .howto b{color:var(--gold)}
 
 /* ---------- 상점 ---------- */
 #shop{flex-direction:column;align-items:center;padding:30px 16px;gap:16px;overflow:auto;
-  background:radial-gradient(ellipse at 50% 0%,#1f4430 0%,#0d1611 70%)}
+  background:radial-gradient(ellipse at 50% 0%,#1f4430 0%,#0c1410 70%)}
 #shop h2{margin:0;font-size:30px}
 .bars{font-size:18px;color:var(--gold)}
-#metaList{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;width:min(880px,100%)}
+#metaList{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;width:min(880px,100%)}
 .meta{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
 .meta .t{display:flex;justify-content:space-between;font-weight:700}
 .meta .lv{color:var(--mute);font-weight:400;font-size:13px}
-.meta .d{font-size:13px;color:#c9d8ce;min-height:36px}
+.meta .d{font-size:13px;color:#c9d8ce;min-height:36px;white-space:pre-line}
 .meta button{border:0;border-radius:8px;padding:8px;font-weight:700;background:var(--gold);color:#3b2600}
 .meta button:disabled{background:#2a3a30;color:#6c8274;cursor:default}
 
 /* ---------- 게임 ---------- */
 #game{flex-direction:row}
-#stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;min-width:0;background:#08100b}
+#stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;min-width:0;background:#070d09}
 #cv{display:block;border-radius:6px;box-shadow:0 0 0 1px var(--line)}
-#side{width:300px;flex:none;background:var(--panel);border-left:1px solid var(--line);
-  padding:12px;display:flex;flex-direction:column;gap:10px;overflow-y:auto}
-.moneybox{background:linear-gradient(180deg,#26391d,#1a2a1c);border:1px solid #4a5d2a;border-radius:12px;padding:10px 12px}
-.moneybox .lbl{font-size:12px;color:var(--mute)}
-#money{font-size:30px;font-weight:900;color:var(--gold);line-height:1.15}
-#money.neg{color:var(--red)}
-.credit{margin-top:6px;font-size:11.5px;color:var(--mute)}
-.credit .bar{height:6px;background:#0c140f;border-radius:4px;overflow:hidden;margin-bottom:3px}
-.credit i{display:block;height:100%;width:0;background:var(--red)}
-.srow{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;text-align:center;font-size:12px;color:var(--mute)}
-.srow div{background:var(--panel2);border-radius:8px;padding:5px 2px}
-.srow b{display:block;color:var(--text);font-size:16px}
-#interestTxt{font-size:12.5px;color:#c9d8ce;background:var(--panel2);border-radius:8px;padding:6px 8px}
-#interestTxt b{color:var(--green)}
+#side{width:310px;flex:none;background:var(--panel);border-left:1px solid var(--line);
+  padding:12px;display:flex;flex-direction:column;gap:9px;overflow-y:auto}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.res div{background:linear-gradient(180deg,#26391d,#1a2a1c);border:1px solid #3e5530;border-radius:10px;padding:6px 10px}
+.res .lbl{font-size:11px;color:var(--mute)}
+.res b{display:block;font-size:22px;font-weight:900;line-height:1.15}
+#goldTxt{color:var(--gold)} #lumberTxt{color:var(--wood)} #livesTxt{color:#ff8a8a} #roundTxt{color:var(--text)}
+#incomeTxt{font-size:12.5px;color:#c9d8ce;background:var(--panel2);border-radius:8px;padding:6px 8px;line-height:1.5}
+#incomeTxt b{color:var(--gold)}
 .ctrl{display:flex;gap:6px}
 .ctrl button{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:8px;padding:9px 0;font-weight:700}
 #waveBtn{flex:1;background:linear-gradient(180deg,#ffd75e,#e0a51c);color:#3b2600;border:0}
@@ -75,32 +70,37 @@ button{font-family:inherit;cursor:pointer}
 #speedBtn,#pauseBtn{width:46px}
 .cdbar{height:4px;background:#0c140f;border-radius:3px;overflow:hidden}
 .cdbar i{display:block;height:100%;width:0;background:var(--gold)}
-#side h3{margin:2px 0 -2px;font-size:13px;color:var(--mute);font-weight:600}
-#buildList{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.bcard{position:relative;background:var(--panel2);border:1.5px solid var(--line);border-radius:10px;padding:7px 8px;cursor:pointer}
+.tabs{display:flex;gap:4px}
+.tabs button{flex:1;border:1px solid var(--line);background:var(--panel2);color:var(--mute);border-radius:8px 8px 0 0;padding:7px 0;font-weight:700;font-size:13px}
+.tabs button.on{background:#25402f;color:var(--text);border-color:#4d7a5e}
+#buildList{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:-4px}
+.bcard{position:relative;background:var(--panel2);border:1.5px solid var(--line);border-radius:10px;padding:6px 8px;cursor:pointer;min-height:64px}
 .bcard:hover{border-color:#4d7a5e}
 .bcard.sel{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
-.bcard.no{opacity:.45}
-.bcard .ic{font-size:20px}
+.bcard.no{opacity:.42}
+.bcard .ic{font-size:19px}
 .bcard .nm{font-size:12.5px;font-weight:700;margin-top:1px}
-.bcard .cs{font-size:12px;color:var(--gold)}
+.bcard .cs{font-size:11.5px;color:var(--gold)}
+.bcard .cs i{font-style:normal;color:var(--wood)}
 .bcard .k{position:absolute;right:6px;top:4px;font-size:10px;color:var(--mute)}
+.bcard .lock{position:absolute;right:6px;bottom:4px;font-size:10px;color:#ff9a9a}
 #info{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 10px;font-size:12.5px}
 #info.hidden{display:none}
 #infoName{font-weight:800;font-size:14px;margin-bottom:4px}
 #infoStats{color:#c9d8ce;line-height:1.6;white-space:pre-line}
-.ibtn{display:flex;gap:6px;margin-top:8px}
-.ibtn button{flex:1;border:0;border-radius:8px;padding:8px 0;font-weight:700}
-#upBtn{background:var(--green);color:#06230f}
-#upBtn:disabled{background:#2a3a30;color:#6c8274;cursor:default}
-#sellBtn{background:#4a2a2a;color:#ffc9c9}
+#infoActs{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+#infoActs button{border:0;border-radius:8px;padding:7px 8px;font-weight:700;text-align:left;font-size:12.5px;background:var(--green);color:#06230f}
+#infoActs button.sell{background:#4a2a2a;color:#ffc9c9}
+#infoActs button.alt{background:#2f4a6a;color:#dceaff}
+#infoActs button:disabled{background:#2a3a30;color:#6c8274;cursor:default}
 #nextWave{font-size:12px;color:#c9d8ce;background:var(--panel2);border-radius:8px;padding:7px 8px;line-height:1.6}
-#nextWave .new{color:var(--gold);font-weight:700}
+#nextWave .air{color:var(--cyan);font-weight:700}
 #nextWave .boss{color:var(--red);font-weight:700}
+#nextWave .wood{color:var(--wood);font-weight:700}
 .hint{font-size:11px;color:var(--mute);line-height:1.6}
 
-#toasts{position:absolute;left:50%;top:14px;transform:translateX(-50%);display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none}
-.toast{background:rgba(10,18,13,.9);border:1px solid var(--line);border-radius:10px;padding:7px 14px;font-size:13.5px;animation:tin .25s ease-out}
+#toasts{position:absolute;left:50%;top:14px;transform:translateX(-50%);display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none;width:max-content;max-width:92%}
+.toast{background:rgba(10,18,13,.92);border:1px solid var(--line);border-radius:10px;padding:7px 14px;font-size:13.5px;animation:tin .25s ease-out}
 .toast b{color:var(--gold)}
 @keyframes tin{from{opacity:0;transform:translateY(-8px)}to{opacity:1}}
 
@@ -118,8 +118,8 @@ button{font-family:inherit;cursor:pointer}
 
 @media (max-width:820px){
   #game{flex-direction:column}
-  #side{width:100%;border-left:0;border-top:1px solid var(--line);max-height:46vh}
-  .logo{font-size:44px}
+  #side{width:100%;border-left:0;border-top:1px solid var(--line);max-height:48vh}
+  .logo{font-size:40px}
 }
 </style>
 </head>
@@ -128,9 +128,10 @@ button{font-family:inherit;cursor:pointer}
 <!-- ===================== 메인 ===================== -->
 <section id="menu" class="screen on">
   <div class="logo">💰 MONEY DEFENSE</div>
-  <div class="sub">돈타워 디펜스 — 금고를 지켜라</div>
+  <div class="sub">돈타워 디펜스 — 돈 버는 건물을 지어 40라운드를 버텨라</div>
   <div class="mstats">
-    <div class="mstat"><b id="mBest">0</b><span>최고 웨이브</span></div>
+    <div class="mstat"><b id="mBest">0</b><span>최고 라운드</span></div>
+    <div class="mstat"><b id="mClears">0</b><span>클리어</span></div>
     <div class="mstat"><b id="mBars">0</b><span>보유 골드바</span></div>
     <div class="mstat"><b id="mRuns">0</b><span>출격 횟수</span></div>
   </div>
@@ -139,13 +140,12 @@ button{font-family:inherit;cursor:pointer}
     <button class="big shop" id="shopBtn">상점</button>
   </div>
   <div class="howto">
-    도둑들이 길을 따라 <b>금고</b>로 몰려옵니다. 금고에 닿은 도둑은 돈을 훔쳐 <b>입구로 도망</b>칩니다 —
-    도망치기 전에 잡으면 <b>전액 회수</b>, 놓치면 끝.<br>
-    <b>잔액이 곧 체력</b>입니다. 잔액이 신용 한도 아래로 떨어지면 <b>파산</b>.
-    웨이브가 끝날 때마다 잔액에 <b>이자</b>가 붙으니, 다 쓰지 말고 모아 두는 것도 전략입니다.<br>
-    <b>돈타워</b>는 때릴 때마다 돈을 법니다 — 약하게 오래 때릴수록 이득. 보스는 맞을 때마다 돈을 떨구니 바로 잡지 말고 <b>피빼기</b>!
-    <b>영웅타워</b>는 강화할 때마다 히든 영웅(쌍칼·백상어)이 랜덤으로 나옵니다.<br>
-    조작: 1~7 타워 선택 → 빈 칸 클릭 · 타워 클릭 후 U 강화 / S 판매 · Space 웨이브 · F 배속 · P 일시정지 · 우클릭/Esc 취소
+    ① 먼저 <b>노동자</b>를 짓고, 그 옆에 <b>돈타워(놀이방)</b>를 지으세요. 돈타워는 몹을 치지 않고 <b>노동자를 때려서 돈</b>을 법니다 (노동자는 안 죽어요).<br>
+    ② 돈타워를 놀이방 → 유치원 → 초등 → 중학교 → 고등학교 → <b>대학교</b>까지 올려 수입을 키우고, 번 돈으로 공격 타워를 지어 몹을 막습니다.<br>
+    ③ <b>5라운드마다 목재</b>를 얻습니다. 목재로 <b>연구</b>와 <b>영웅</b>(옆집 아줌마·딸내미·공익근무요원·동네 아저씨)을 삽니다.
+    연구소가 있어야 <b>붙잡힌 양아치</b>를 지을 수 있고, 동네 아저씨는 <b>흡연구역</b> 근처에서만 싸웁니다.<br>
+    ④ <b>공중 라운드</b>는 길을 무시하고 날아옵니다 — 대공 타워를 준비하세요. 40라운드 최종 보스를 잡으면 클리어!<br>
+    조작: 탭 선택 후 1~6으로 건물 선택 → 빈 칸 클릭 · 건물 클릭 후 U 업그레이드 / S 판매 · Space 라운드 · F 배속 · P 일시정지 · 우클릭/Esc 취소
   </div>
 </section>
 
@@ -168,7 +168,7 @@ button{font-family:inherit;cursor:pointer}
       </div>
     </div>
     <div class="overlay" id="overOv">
-      <div class="ovbox"><h2>💸 파산!</h2>
+      <div class="ovbox"><h2 id="overTitle">패배</h2>
         <div class="rows" id="overRows"></div>
         <div class="earn" id="overEarn"></div>
         <div class="ovbtns"><button class="a" id="againBtn">다시 출격</button><button class="b" id="toMenuBtn">메인으로</button></div>
@@ -176,32 +176,28 @@ button{font-family:inherit;cursor:pointer}
     </div>
   </div>
   <aside id="side">
-    <div class="moneybox">
-      <div class="lbl">금고 잔액</div>
-      <div id="money">0G</div>
-      <div class="credit"><div class="bar"><i id="creditBar"></i></div><span id="creditTxt"></span></div>
+    <div class="res">
+      <div><span class="lbl">골드</span><b id="goldTxt">0</b></div>
+      <div><span class="lbl">목재</span><b id="lumberTxt">0</b></div>
+      <div><span class="lbl">목숨</span><b id="livesTxt">0</b></div>
+      <div><span class="lbl">라운드</span><b id="roundTxt">0</b></div>
     </div>
-    <div class="srow">
-      <div>웨이브<b id="waveTxt">0</b></div>
-      <div>남은 적<b id="enemyTxt">0</b></div>
-      <div>최고<b id="bestTxt">0</b></div>
-    </div>
-    <div id="interestTxt"></div>
+    <div id="incomeTxt"></div>
     <div class="ctrl">
-      <button id="waveBtn">웨이브 1 시작</button>
+      <button id="waveBtn">라운드 1 시작</button>
       <button id="speedBtn">1x</button>
       <button id="pauseBtn">⏸</button>
     </div>
     <div class="cdbar"><i id="cdFill"></i></div>
-    <h3>타워 건설</h3>
+    <div class="tabs" id="tabs"></div>
     <div id="buildList"></div>
     <div id="info" class="hidden">
       <div id="infoName"></div>
       <div id="infoStats"></div>
-      <div class="ibtn"><button id="upBtn">강화</button><button id="sellBtn">판매</button></div>
+      <div id="infoActs"></div>
     </div>
     <div id="nextWave"></div>
-    <div class="hint">우클릭·Esc로 건설/선택 취소 · 도둑을 잡으면 들고 있던 돈을 회수합니다.</div>
+    <div class="hint">돈타워는 사거리 안에 노동자가 있어야 돈을 법니다 · 슬로우 타워와 아이스(물) 감속은 중복됩니다.</div>
   </aside>
 </section>
 
@@ -213,88 +209,119 @@ button{font-family:inherit;cursor:pointer}
 const TILE = 40, COLS = 22, ROWS = 14, W = COLS * TILE, H = ROWS * TILE;
 
 const CFG = {
-  startMoney: 100,        // 시작 잔액
-  creditLimit: 50,        // 잔액이 -이 값 아래로 내려가면 파산
-  interestRate: 0.05,     // 웨이브 종료 시 잔액 이자율
-  interestCap: 30,        // 이자 최대치
-  waveGapSec: 5,          // 웨이브 사이 자동 시작 대기(실제 시간)
-  sellRate: 0.7,          // 판매 환급률
-  maxLv: 10,              // 타워 최대 레벨
-  hpPerWave: 0.07,        // 웨이브당 적 체력 +7% (선형)
-  hpExp: 1.03,            // 여기에 웨이브당 ×1.03 복리가 곱해짐
-  stealPerWave: 0.03,     // 웨이브당 훔치는 금액 +3%
-  goldPerWave: 0.03,      // 웨이브당 처치 보상 +3%
-  bossEvery: 10,
-  clearBonus: w => 10 + 2 * w,
-  count: w => 6 + Math.floor(w * 1.1),
-  spawnGap: w => Math.max(0.35, 0.95 - w * 0.006),
+  startGold: 200,
+  startLumber: 0,
+  lives: 30,
+  rounds: 40,
+  waveGapSec: 5,            // 라운드 사이 자동 시작 대기 (실제 시간)
+  sellRate: 0.7,
+  maxLv: 10,                // 공격 타워·영웅 최대 단계
+  clearBonus: r => 20 + r * 3,
+  killGold: r => 1 + Math.floor(r / 6),
+  hp: r => Math.round(26 * Math.pow(1.18, r - 1)),   // 라운드 기본 체력
+  count: r => 14 + Math.floor(r / 4),
+  airCount: 12,
+  bossHpMul: 15, finalHpMul: 14,
+  lumberEvery: 5,           // 5·15·25·35 라운드는 처치마다 목재 +1
+  bossLumber: 10,           // 보스 처치 시 목재
+  spawnGap: r => Math.max(0.45, 0.95 - r * 0.012),
 };
 
-// 타워: 레벨당 피해 +40%, 공속 +8%, 사거리 +5% (기본값 기준)
+// 몹 종류 — 라운드마다 한 종류만 나온다 (워크3 TD 방식)
+const KINDS = {
+  kid:   { name:'동네 꼬마', icon:'👦', spd:62,  hpM:1.0,  armor:0, color:'#a58a6a' },
+  punk:  { name:'불량배',   icon:'😠', spd:64,  hpM:1.1,  armor:1, color:'#9a5a4a' },
+  pick:  { name:'소매치기', icon:'🦝', spd:78,  hpM:0.9,  armor:0, color:'#7d7466' },
+  bike:  { name:'폭주족',   icon:'🛵', spd:108, hpM:0.75, armor:0, color:'#c06b3e' },
+  thug:  { name:'깡패',     icon:'🕶️', spd:56,  hpM:1.4,  armor:3, color:'#3d3d3d' },
+  gang:  { name:'조폭',     icon:'🐯', spd:60,  hpM:1.6,  armor:5, color:'#8a6a2a' },
+  bat:   { name:'박쥐 떼',  icon:'🦇', spd:100, hpM:0.8,  armor:0, air:true, color:'#4a3a5a' },
+  eagle: { name:'독수리',   icon:'🦅', spd:110, hpM:0.9,  armor:1, air:true, color:'#6a4a2a' },
+  ufo:   { name:'정체불명 비행체', icon:'🛸', spd:115, hpM:1.0, armor:2, air:true, color:'#4a6a7a' },
+  heli:  { name:'헬기',     icon:'🚁', spd:120, hpM:1.1,  armor:3, air:true, color:'#4a5a3a' },
+  dragon:{ name:'용',       icon:'🐉', spd:125, hpM:1.2,  armor:4, air:true, color:'#2a6a4a' },
+  boss1: { name:'사채업자',     icon:'💼', spd:42, hpM:1, armor:3, boss:true, color:'#1f3b5c' },
+  boss2: { name:'고리대금업자', icon:'🎩', spd:44, hpM:1, armor:5, boss:true, color:'#222' },
+  boss3: { name:'조폭 두목',    icon:'🐲', spd:46, hpM:1, armor:8, boss:true, color:'#5a1a1a' },
+  final: { name:'돈의 신',      icon:'👑', spd:40, hpM:1, armor:10, boss:true, final:true, color:'#8a6a08' },
+};
+const ROUNDS = [null,
+  'kid','kid','punk','pick','punk','bike','thug','bat','pick','boss1',
+  'punk','bike','thug','gang','pick','eagle','thug','bike','gang','boss2',
+  'thug','bike','gang','ufo','thug','gang','bike','gang','thug','boss3',
+  'gang','bike','heli','gang','thug','bike','gang','thug','dragon','final'];
+
+// 돈타워 단계: 노동자를 때릴 때마다 gold
+const MONEY_TIERS = [
+  { name:'놀이방',   icon:'🧸', gold:2,  rate:1.0, up:0 },
+  { name:'유치원',   icon:'🎒', gold:3,  rate:1.1, up:80 },
+  { name:'초등학교', icon:'✏️', gold:5,  rate:1.2, up:180 },
+  { name:'중학교',   icon:'📘', gold:8,  rate:1.3, up:380 },
+  { name:'고등학교', icon:'🏫', gold:12, rate:1.4, up:750 },
+  { name:'대학교',   icon:'🎓', gold:18, rate:1.5, up:1400 },
+];
+
+// 건물·타워·영웅. 공격형은 단계당 피해 +50%, 공속 +8%, 사거리 +4%
 const TOWERS = {
-  money:   { key:'1', name:'돈타워',     icon:'💸', cost:30,  dmg:4,  rate:2.0,  range:110, color:'#f5c542', hitGold:0.5, hitGoldLv:0.15, dmgGrow:0.2, desc:'때릴 때마다 돈을 번다 (삥) · 화력은 약함' },
-  coin:    { key:'2', name:'동전 발사기', icon:'🪙', cost:25,  dmg:6,  rate:2.2,  range:105, color:'#ffd98a', desc:'빠른 연사 · 단일' },
-  bill:    { key:'3', name:'지폐 대포',   icon:'💵', cost:60,  dmg:16, rate:0.75, range:100, splash:48, color:'#3ddc84', desc:'범위 피해' },
-  freeze:  { key:'4', name:'계좌 동결기', icon:'🧊', cost:45,  dmg:3,  rate:1.1,  range:95,  slow:0.45, slowT:1.6, color:'#6fd6ff', desc:'이동속도 45% 감소' },
-  goldbar: { key:'5', name:'금괴 저격대', icon:'🥇', cost:110, dmg:55, rate:0.45, range:210, pierce:true, color:'#ffb347', desc:'장거리 · 방어 무시' },
-  hero:    { key:'6', name:'영웅타워',   icon:'🗡️', cost:150, dmg:22, rate:1.0,  range:135, color:'#ff7ad9', hero:true, desc:'강화할 때마다 히든 영웅 뽑기 (랜덤)' },
-  bank:    { key:'7', name:'은행 지점',   icon:'🏦', cost:80,  income:12, incomeLv:8, color:'#b48cff', desc:'웨이브마다 수입' },
+  worker:   { tab:'eco', name:'노동자',    icon:'👷', cost:20,  max:3, worker:true, color:'#e0b050', desc:'돈타워가 때리는 샌드백 · 절대 안 죽음' },
+  money:    { tab:'eco', name:'돈타워',    icon:'🧸', cost:50,  range:130, money:true, color:'#f5c542', desc:'노동자를 때려 돈을 번다 (몹은 안 침)' },
+  lab:      { tab:'eco', name:'연구소',    icon:'🔬', cost:150, max:1, lab:true, color:'#8fd1ff', desc:'연구 · 목재 교환 · 붙잡힌 양아치 해금' },
+  smoke:    { tab:'eco', name:'흡연구역',  icon:'🚬', cost:40,  range:150, smoke:true, color:'#aaaaaa', desc:'동네 아저씨는 이 근처에서만 싸운다' },
+  store:    { tab:'eco', name:'비밀 창고', icon:'📦', cost:300, max:1, store:true, color:'#c98b4a', desc:'아이템 구매 (손칼·워드럼·지팡이)' },
+  sling:    { tab:'atk', name:'동네 새총',   icon:'🪃', cost:40,  dmg:8,  rate:1.2, range:110, air:true, color:'#e0c080', desc:'싸고 무난한 기본 타워 · 대공 가능' },
+  slow:     { tab:'atk', name:'슬로우 타워', icon:'🐌', cost:60,  dmg:5,  rate:1.0, range:115, slowA:0.3, slowT:2, air:true, color:'#8fd1ff', desc:'감속 30% · 대공 가능' },
+  ice:      { tab:'atk', name:'아이스 타워', icon:'❄️', cost:90,  dmg:12, rate:0.8, range:110, splash:50, slowB:0.25, slowT:2, color:'#cfefff', desc:'범위 피해 + 감속 25% (슬로우와 중복)' },
+  stun:     { tab:'atk', name:'스턴 타워',   icon:'⚡', cost:80,  dmg:14, rate:0.7, range:105, stun:0.15, stunT:0.6, color:'#ffe066', desc:'15% 확률 기절 — 너무 올릴 필요는 없음' },
+  multi:    { tab:'atk', name:'멀티샷 타워', icon:'🏹', cost:120, dmg:9,  rate:1.4, range:130, targets:3, air:true, color:'#9cff8f', desc:'동시에 3명 공격 · 대공 가능' },
+  yangachi: { tab:'atk', name:'붙잡힌 양아치', icon:'⛓️', cost:200, dmg:16, rate:1.2, range:120, air:true, needLab:true, growth:0.01, color:'#ff9a5c', desc:'처치할 때마다 피해 +1% — 나중에 괴물이 된다' },
+  auntie:   { tab:'hero', name:'옆집 아줌마',  icon:'👵', cost:600,  lumber:5,  max:1, dmg:28,  rate:0.8, range:140, splash:65, slowB:0.35, slowT:2.5, color:'#7fd6ff', desc:'물 끼얹기 — 넓은 범위 감속' },
+  daughter: { tab:'hero', name:'옆집 딸내미',  icon:'👧', cost:800,  lumber:8,  max:1, dmg:22,  rate:1.2, range:140, air:true, auraDmg:0.3, auraR:210, color:'#ff8fd0', desc:'이너파이어 — 주변 타워 피해 +30%' },
+  gongik:   { tab:'hero', name:'공익근무요원', icon:'🦺', cost:1200, lumber:10, max:1, dmg:45,  rate:1.0, range:150, air:true, airMul:2, auraRate:0.3, auraR:210, color:'#ffd166', desc:'공중 피해 2배 · 주변 공속 +30%' },
+  uncle:    { tab:'hero', name:'동네 아저씨',  icon:'🧔', cost:3000, lumber:15, max:2, dmg:150, rate:1.0, range:150, air:true, crit:0.25, extort:0.05, needSmoke:true, color:'#c9a27a', desc:'공갈협박: 피해의 5%를 돈으로 · 25% 치명타 · 흡연구역 필요' },
 };
-// 영웅타워 히든: 강화 시 chance 확률로 변신 (한 번 뽑히면 고정)
-const HIDDEN_HEROES = [
-  { name:'쌍칼',   icon:'⚔️', chance:0.03, dmg:1.6, rate:2.4, range:1.0, desc:'공격속도 대폭 증가' },
-  { name:'백상어', icon:'🦈', chance:0.01, dmg:3.0, rate:1.2, range:1.2, splash:60, desc:'거대한 범위 공격' },
-];
-const upCost = t => Math.round(t.def.cost * (0.6 + 0.25 * (t.lv - 1)));
+const TABS = [ { id:'eco', name:'경제' }, { id:'atk', name:'공격' }, { id:'hero', name:'영웅' } ];
+const upCost = t => Math.round(t.def.cost * 0.8 * t.lv);
 
-// 적: from~to 웨이브에만 등장. weight = 출현 비중
-const ENEMIES = {
-  pick:   { name:'소매치기',   icon:'🦝', color:'#8d7a62', hp:14,  spd:62, steal:5,  gold:1, armor:0, r:9,  from:1,  to:30,  weight:10 },
-  snatch: { name:'날치기',     icon:'🛵', color:'#c06b3e', hp:10,  spd:105,steal:4,  gold:1, armor:0, r:8,  from:6,  to:40,  weight:7 },
-  safe:   { name:'금고털이',   icon:'🦹', color:'#4f5b8a', hp:45,  spd:46, steal:15, gold:3, armor:2, r:12, from:11, to:50,  weight:5 },
-  scam:   { name:'사기꾼',     icon:'🃏', color:'#8a4f7d', hp:35,  spd:60, steal:10, gold:2, armor:0, r:11, from:20, to:60,  weight:5, split:'pick' },
-  gang:   { name:'갱단',       icon:'🕶️', color:'#3a3a3a', hp:90,  spd:55, steal:20, gold:4, armor:4, r:13, from:30, to:70,  weight:4 },
-  truck:  { name:'수송차 강도', icon:'🚚', color:'#6b6b2a', hp:220, spd:38, steal:40, gold:8, armor:8, r:16, from:40, to:80,  weight:2 },
-  ghost:  { name:'인플레이션', icon:'👻', color:'#5f8f86', hp:120, spd:64, steal:25, gold:5, armor:2, r:13, from:50, to:90,  weight:3, heal:true },
-  hacker: { name:'해커',       icon:'💻', color:'#2f6b4a', hp:160, spd:58, steal:20, gold:6, armor:3, r:13, from:70, to:100, weight:3, jam:true },
-  phish:  { name:'보이스피싱', icon:'📞', color:'#7a2f2f', hp:200, spd:52, steal:0,  gold:8, armor:3, r:13, from:80, to:100, weight:2, drain:4, stopAt:0.8 },
-};
-const BOSSES = [
-  // hitGold: 맞을 때마다 떨구는 돈 — 바로 잡지 말고 '피빼기'로 뜯어내는 게 이득
-  { id:'bossGori',  name:'고리대금업자', icon:'🎩', color:'#222', hp:520, spd:40, steal:120, gold:40, armor:3, r:19, boss:true, hitGold:1 },
-  { id:'bossShark', name:'사채업자',     icon:'💼', color:'#1f3b5c', hp:760, spd:33, steal:200, gold:60, armor:6, r:21, boss:true, hitGold:1.5, summon:'pick' },
+// 연구소 연구 (목재)
+const RESEARCH = [
+  { id:'dmg',   name:'공격력 연구', max:5, eff:'모든 타워 피해 +10%',  cost:l => 2 + l * 2 },
+  { id:'rate',  name:'공속 연구',   max:5, eff:'모든 타워 공속 +8%',   cost:l => 2 + l * 2 },
+  { id:'money', name:'돈타워 연구', max:5, eff:'돈타워 수입 +15%',     cost:l => 3 + l * 3 },
 ];
-for (const [id, d] of Object.entries(ENEMIES)) d.id = id;
-for (const b of BOSSES) ENEMIES[b.id] = b;
-const ENEMY_LIST = Object.values(ENEMIES).filter(d => !d.boss);
+const EXCHANGE = { gold:300, lumber:5 };
+
+// 비밀 창고 아이템 (골드, 한 번씩)
+const ITEMS = [
+  { id:'knife', name:'손칼',   icon:'🔪', cost:1500, desc:'모든 공격 15% 확률 치명타 ×2.5' },
+  { id:'drum',  name:'워드럼', icon:'🥁', cost:2000, desc:'모든 타워 피해 +20%' },
+  { id:'staff', name:'지팡이', icon:'🪄', cost:3000, desc:'모든 공격 타워 대상 +1 (멀티샷)' },
+];
 
 // 영구 강화 (골드바)
 const META = [
-  { id:'start',  name:'초기 자금',  max:10, desc:l => `시작 잔액 +${l*25}G` },
-  { id:'rate',   name:'이자율',     max:5,  desc:l => `웨이브 이자율 +${l}%` },
-  { id:'cap',    name:'이자 한도',  max:10, desc:l => `이자 최대치 +${l*20}G` },
-  { id:'credit', name:'신용 한도',  max:8,  desc:l => `파산 한도 +${l*25}G` },
-  { id:'dmg',    name:'타워 화력',  max:10, desc:l => `모든 타워 피해 +${l*5}%` },
-  { id:'bounty', name:'현상금',     max:5,  desc:l => `처치 보상 +${l*10}%` },
+  { id:'gold',   name:'초기 자금',     max:10, desc:l => `시작 골드 +${l*50}` },
+  { id:'lives',  name:'목숨',          max:5,  desc:l => `시작 목숨 +${l*5}` },
+  { id:'lumber', name:'초기 목재',     max:5,  desc:l => `시작 목재 +${l*2}` },
+  { id:'dmg',    name:'타워 화력',     max:10, desc:l => `모든 타워 피해 +${l*5}%` },
+  { id:'money',  name:'돈타워 수입',   max:10, desc:l => `돈타워 수입 +${l*5}%` },
 ];
 const metaCost = lv => 2 + lv * 2;
-const barsFor = cleared => cleared + Math.floor(cleared / 10) * 5;
+const barsFor = (cleared, win) => cleared + Math.floor(cleared / 10) * 3 + (win ? 30 : 0);
 
-// 길: 그리드 좌표 웨이포인트 (입구 → 금고 앞)
-const PATH = [[-1,2],[4,2],[4,10],[9,10],[9,3],[14,3],[14,11],[17,11],[17,7],[18,7]];
-const VAULT = { c:19, r:6, w:2, h:2 };
+// 길: 눈 덮인 지그재그 레인 (그리드 좌표)
+const PATH = [[1,-1],[1,12],[5,12],[5,1],[9,1],[9,12],[13,12],[13,1],[17,1],[17,12],[22,12]];
 
 /* =====================================================================
    저장
    ===================================================================== */
-const SAVE_KEY = 'moneydefense.save';
-let save = { best:0, bars:0, runs:0, meta:{} };
+const SAVE_KEY = 'moneydefense.v2';
+let save = { best:0, clears:0, bars:0, runs:0, meta:{} };
 try { const s = JSON.parse(localStorage.getItem(SAVE_KEY)); if (s) save = Object.assign(save, s); } catch (e) {}
 const persist = () => { try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch (e) {} };
 const mlv = id => save.meta[id] || 0;
 
 /* =====================================================================
-   경로 계산
+   경로
    ===================================================================== */
 const PX = PATH.map(([c, r]) => [(c + .5) * TILE, (r + .5) * TILE]);
 const SEG = [];
@@ -313,14 +340,15 @@ function posAt(d) {
   }
   const l = PX[PX.length - 1]; return { x: l[0], y: l[1] };
 }
+// 공중 몹은 입구에서 출구로 직선 비행
+const AIR_A = { x: PX[0][0], y: PX[0][1] }, AIR_B = { x: PX[PX.length - 1][0], y: PX[PX.length - 1][1] };
+const AIR_LEN = Math.hypot(AIR_B.x - AIR_A.x, AIR_B.y - AIR_A.y);
 const BLOCK = new Set();
 for (let i = 0; i < PATH.length - 1; i++) {
   let [c, r] = PATH[i]; const [c1, r1] = PATH[i + 1];
   const dc = Math.sign(c1 - c), dr = Math.sign(r1 - r);
-  while (true) { if (c >= 0) BLOCK.add(c + ',' + r); if (c === c1 && r === r1) break; c += dc; r += dr; }
+  while (true) { if (c >= 0 && r >= 0 && c < COLS && r < ROWS) BLOCK.add(c + ',' + r); if (c === c1 && r === r1) break; c += dc; r += dr; }
 }
-for (let c = VAULT.c; c < VAULT.c + VAULT.w; c++) for (let r = VAULT.r; r < VAULT.r + VAULT.h; r++) BLOCK.add(c + ',' + r);
-const VX = (VAULT.c + VAULT.w / 2) * TILE, VY = (VAULT.r + VAULT.h / 2) * TILE;
 
 /* =====================================================================
    게임 상태
@@ -328,251 +356,273 @@ const VX = (VAULT.c + VAULT.w / 2) * TILE, VY = (VAULT.r + VAULT.h / 2) * TILE;
 let G = null;
 function newGame() {
   G = {
-    money: CFG.startMoney + mlv('start') * 25,
-    credit: CFG.creditLimit + mlv('credit') * 25,
-    rate: CFG.interestRate + mlv('rate') * 0.01,
-    cap: CFG.interestCap + mlv('cap') * 20,
-    dmgMul: 1 + mlv('dmg') * 0.05,
-    bountyMul: 1 + mlv('bounty') * 0.1,
-    wave: 0, inWave: false, queue: [], spawnT: 0,
+    gold: CFG.startGold + mlv('gold') * 50,
+    lumber: CFG.startLumber + mlv('lumber') * 2,
+    lives: CFG.lives + mlv('lives') * 5,
+    round: 0, inWave: false, queue: [], spawnT: 0,
     enemies: [], towers: [], grid: {}, bullets: [], beams: [], parts: [], floats: [],
-    countdown: -1, speed: 1, paused: false, over: false,
-    sel: null, build: null, hover: null, banner: null, shake: 0,
-    stats: { kills: 0, stolen: 0, recovered: 0, interest: 0, escaped: 0, hitGold: 0 }, hitAcc: 0,
+    research: { dmg: 0, rate: 0, money: 0 }, items: {},
+    countdown: -1, speed: 1, paused: false, over: false, won: false,
+    sel: null, build: null, hover: null, banner: null, tab: 'eco',
+    stats: { kills: 0, leaks: 0, moneyGold: 0, extort: 0, lumber: 0 },
+    incomeWin: [],   // 최근 10초 돈타워 수입 (초당 수입 표시용)
+    time: 0,
   };
   $('overOv').classList.remove('on'); $('pauseOv').classList.remove('on');
   $('toasts').innerHTML = '';
-  selectBuild(null); selectTower(null);
+  buildTabs(); renderBuildList(); selectTower(null);
 }
+const countOf = type => G.towers.filter(t => t.type === type).length;
+const hasType = type => G.towers.some(t => t.type === type);
 
-/* ---------- 웨이브 ---------- */
-function eligible(w) {
-  let el = ENEMY_LIST.filter(d => w >= d.from && w <= d.to);
-  if (!el.length) el = ENEMY_LIST.filter(d => d.to >= 100);
-  return el;
-}
-function pickType(w) {
-  const el = eligible(w);
-  const ws = el.map(d => d.weight * (w - d.from < 5 ? 1.6 : 1));
-  let r = Math.random() * ws.reduce((a, b) => a + b, 0);
-  for (let i = 0; i < el.length; i++) { r -= ws[i]; if (r <= 0) return el[i].id; }
-  return el[el.length - 1].id;
-}
-function buildWave(w) {
-  const n = CFG.count(w), gap = CFG.spawnGap(w), q = [];
-  for (let i = 0; i < n; i++) q.push({ id: pickType(w), gap });
-  if (w % CFG.bossEvery === 0) q.push({ id: BOSSES[(w / CFG.bossEvery - 1) % BOSSES.length].id, gap: 2 });
+/* ---------- 라운드 ---------- */
+function roundKind(r) { return KINDS[ROUNDS[Math.min(r, ROUNDS.length - 1)]]; }
+function buildRound(r) {
+  const k = roundKind(r), q = [];
+  if (k.boss) q.push({ kind: k });
+  else { const n = k.air ? CFG.airCount : CFG.count(r); for (let i = 0; i < n; i++) q.push({ kind: k }); }
   return q;
 }
 function startWave() {
-  if (!G || G.inWave || G.over) return;
-  G.wave++; G.inWave = true; G.countdown = -1;
-  G.queue = buildWave(G.wave); G.spawnT = 0;
-  const boss = G.wave % CFG.bossEvery === 0;
-  G.banner = { text: boss ? `⚠ 웨이브 ${G.wave} — 보스 출현!` : `웨이브 ${G.wave}`, t: 0, boss };
-  const fresh = ENEMY_LIST.filter(d => d.from === G.wave);
-  for (const d of fresh) toast(`신규 적 등장: ${d.icon} <b>${d.name}</b>`);
+  if (!G || G.inWave || G.over || G.round >= CFG.rounds) return;
+  G.round++; G.inWave = true; G.countdown = -1;
+  G.queue = buildRound(G.round); G.spawnT = 0;
+  const k = roundKind(G.round);
+  const tag = k.final ? '👑 최종 보스!' : k.boss ? '⚠ 보스 라운드' : k.air ? '🪽 공중 라운드' : G.round % CFG.lumberEvery === 0 ? '🪵 목재 라운드' : '';
+  G.banner = { text: `라운드 ${G.round} — ${k.icon} ${k.name}${tag ? '  ' + tag : ''}`, t: 0, boss: !!k.boss };
 }
 function endWave() {
   G.inWave = false;
-  const bonus = CFG.clearBonus(G.wave);
-  const interest = G.money > 0 ? Math.min(G.cap, Math.floor(G.money * G.rate)) : 0;
-  let bank = 0;
-  for (const t of G.towers) if (t.def.income) { const v = tStat(t).income; bank += v; addFloat(t.x, t.y - 20, `+${v}`, '#b48cff'); }
-  G.money += bonus + interest + bank;
-  G.stats.interest += interest;
-  toast(`웨이브 ${G.wave} 클리어 · 보너스 <b>+${bonus}</b> · 이자 <b>+${interest}</b>${bank ? ` · 은행 <b>+${bank}</b>` : ''}`);
-  if (G.wave > save.best) { save.best = G.wave; persist(); }
+  const bonus = CFG.clearBonus(G.round);
+  G.gold += bonus;
+  toast(`라운드 ${G.round} 클리어 · 보너스 <b>+${bonus}G</b>`);
+  if (G.round > save.best) { save.best = G.round; persist(); }
+  if (G.round >= CFG.rounds) { finish(true); return; }
   G.countdown = CFG.waveGapSec;
 }
 
 /* ---------- 적 ---------- */
-function spawnEnemy(id, dist = 0, dir = 1, hpScale = 1) {
-  const d = ENEMIES[id], w = Math.max(1, G.wave);
-  const hp = Math.max(1, Math.round(d.hp * (1 + CFG.hpPerWave * (w - 1)) * Math.pow(CFG.hpExp, w - 1) * hpScale));
-  const p = posAt(dist);
+function spawnEnemy(kind) {
+  const r = G.round;
+  let hp = CFG.hp(r) * kind.hpM;
+  if (kind.boss) hp *= kind.final ? CFG.finalHpMul : CFG.bossHpMul;
+  hp = Math.round(hp);
   const e = {
-    id, d, hp, maxHp: hp, dist, dir, x: p.x, y: p.y,
-    spd: d.spd * (0.94 + Math.random() * 0.12),
-    steal: Math.round(d.steal * (1 + CFG.stealPerWave * (w - 1))),
-    gold: d.gold * (1 + CFG.goldPerWave * (w - 1)),
-    carry: 0, slowT: 0, slowAmt: 0, t: Math.random() * 2, draining: false, dead: false, hitT: 0,
+    kind, hp, maxHp: hp, dist: 0, x: AIR_A.x, y: AIR_A.y,
+    spd: kind.spd * (0.95 + Math.random() * 0.1),
+    slowA: 0, slowAT: 0, slowB: 0, slowBT: 0, stunT: 0, hitT: 0, dead: false,
   };
   G.enemies.push(e); return e;
 }
-function hitEnemy(e, dmg, pierce, t) {
-  if (e.dead) return;
-  const real = pierce ? dmg : Math.max(dmg * 0.25, dmg - e.d.armor);
-  e.hp -= real; e.hitT = 0.08;
-  // 삥: 돈타워는 때릴 때마다, 보스는 맞을 때마다 돈이 나온다
-  let g = 0;
-  if (t && t.def.hitGold) g += t.def.hitGold + t.def.hitGoldLv * (t.lv - 1);
-  if (e.d.hitGold) g += e.d.hitGold * (1 + CFG.goldPerWave * (G.wave - 1));
-  if (g > 0) {
-    G.money += g; G.stats.hitGold += g; G.hitAcc += g;
-    if (G.hitAcc >= 5) { addFloat(e.x + 10, e.y - 4, `+${Math.floor(G.hitAcc)}`, '#ffe58a'); G.hitAcc -= Math.floor(G.hitAcc); }
-  }
-  if (e.hp <= 0) killEnemy(e);
+function enemyPos(e) {
+  if (e.kind.air) { const k = Math.min(1, e.dist / AIR_LEN); return { x: AIR_A.x + (AIR_B.x - AIR_A.x) * k, y: AIR_A.y + (AIR_B.y - AIR_A.y) * k }; }
+  return posAt(e.dist);
 }
-function killEnemy(e) {
-  e.dead = true;
-  const g = Math.max(1, Math.round(e.gold * G.bountyMul));
-  const back = Math.round(e.carry);
-  G.money += g + back; G.stats.kills++;
-  addFloat(e.x, e.y - 10, `+${g}`, '#f5c542');
-  if (back > 0) { G.stats.recovered += back; addFloat(e.x, e.y - 26, `회수 +${back}`, '#3ddc84'); }
-  burst(e.x, e.y, back > 0 ? '#3ddc84' : '#f5c542', e.d.boss ? 30 : 10);
-  if (e.d.split) for (let i = 0; i < 2; i++) {
-    const c = spawnEnemy(e.d.split, Math.max(0, e.dist + (i ? -12 : 12) * e.dir), e.dir, 0.8);
-    c.carry = 0;
+function hitEnemy(e, dmg, src) {
+  if (e.dead) return;
+  let d = dmg;
+  if (src) {
+    if (e.kind.air && src.def.airMul) d *= src.def.airMul;
+    let crit = false;
+    if (src.def.crit && Math.random() < src.def.crit) { d *= 3; crit = true; }
+    else if (G.items.knife && Math.random() < 0.15) { d *= 2.5; crit = true; }
+    if (crit && Math.random() < 0.3) addFloat(e.x, e.y - 14, `치명타!`, '#ff9a5c');
   }
-  if (e.d.boss) toast(`보스 처치! ${e.d.icon} <b>${e.d.name}</b> +${g}G`);
+  const real = Math.max(d * 0.25, d - e.kind.armor);
+  e.hp -= real; e.hitT = 0.08;
+  if (src && src.def.extort) {
+    const g = real * src.def.extort; G.gold += g; G.stats.extort += g;
+    src.acc = (src.acc || 0) + g;
+    if (src.acc >= 20) { addFloat(src.x, src.y - 22, `삥 +${Math.floor(src.acc)}`, '#ffe58a'); src.acc = 0; }
+  }
+  if (e.hp <= 0) killEnemy(e, src);
+}
+function killEnemy(e, src) {
+  e.dead = true; G.stats.kills++;
+  const g = CFG.killGold(G.round) * (e.kind.boss ? 40 : 1);
+  G.gold += g;
+  let lum = 0;
+  if (e.kind.boss) lum = CFG.bossLumber;
+  else if (G.round % CFG.lumberEvery === 0) lum = 1;
+  if (lum) { G.lumber += lum; G.stats.lumber += lum; addFloat(e.x, e.y - 24, `🪵+${lum}`, '#c98b4a'); }
+  if (e.kind.boss || Math.random() < 0.35) addFloat(e.x, e.y - 10, `+${g}`, '#f5c542');
+  burst(e.x, e.y, e.kind.boss ? '#ffd166' : '#f5c542', e.kind.boss ? 40 : 7);
+  if (src && src.def.growth) src.kills = (src.kills || 0) + 1;
+  if (e.kind.boss) toast(`보스 처치! ${e.kind.icon} <b>${e.kind.name}</b> +${g}G · 목재 +${lum}`);
 }
 function updateEnemies(dt) {
   for (const e of G.enemies) {
     if (e.dead) continue;
-    e.t += dt; e.hitT -= dt;
-    if (e.slowT > 0) e.slowT -= dt;
-    const sp = e.spd * (e.slowT > 0 ? 1 - e.slowAmt : 1);
-
-    if (e.d.drain && e.dir > 0 && e.dist >= PATH_LEN * e.d.stopAt) {
-      // 보이스피싱: 멈춰 서서 원격 인출 — 잡으면 인출액 회수
-      e.draining = true;
-      const amt = e.d.drain * (1 + CFG.stealPerWave * (G.wave - 1)) * dt;
-      G.money -= amt; e.carry += amt; G.stats.stolen += amt;
-      e.dfloat = (e.dfloat || 0) + amt;
-      if (e.dfloat >= 5) { addFloat(VX, VY - 30, `-${Math.round(e.dfloat)}`, '#ff5d5d'); e.dfloat = 0; }
-    } else {
-      e.dist += sp * dt * e.dir;
+    e.hitT -= dt;
+    if (e.slowAT > 0) e.slowAT -= dt; else e.slowA = 0;
+    if (e.slowBT > 0) e.slowBT -= dt; else e.slowB = 0;
+    if (e.stunT > 0) { e.stunT -= dt; }
+    else e.dist += e.spd * (1 - e.slowA) * (1 - e.slowB) * dt;
+    const len = e.kind.air ? AIR_LEN : PATH_LEN;
+    if (e.dist >= len) {
+      e.dead = true; G.stats.leaks++;
+      const loss = e.kind.final ? G.lives : e.kind.boss ? 10 : 1;
+      G.lives -= loss;
+      addFloat(AIR_B.x - 20, AIR_B.y - 20, `목숨 -${loss}`, '#ff5d5d');
+      if (e.kind.boss) toast(`${e.kind.icon} <b style="color:#ff5d5d">${e.kind.name}</b>이(가) 뚫고 지나갔습니다! 목숨 -${loss}`);
     }
-    if (e.dir > 0 && e.dist >= PATH_LEN) {
-      e.dist = PATH_LEN; e.dir = -1;
-      G.money -= e.steal; e.carry += e.steal; G.stats.stolen += e.steal; G.shake = 0.35;
-      addFloat(VX, VY - 30, `-${e.steal}`, '#ff5d5d');
-    }
-    if (e.dir < 0 && e.dist <= 0) {
-      e.dead = true; e.escaped = true; G.stats.escaped++;
-      if (e.carry > 0) toast(`${e.d.icon} ${e.d.name}이(가) <b style="color:#ff5d5d">${Math.round(e.carry)}G</b>를 들고 도주했습니다`);
-    }
-    const p = posAt(e.dist); e.x = p.x; e.y = p.y;
-
-    if (e.d.heal && e.t >= 2) {
-      e.t = 0;
-      for (const o of G.enemies) if (!o.dead && o !== e && Math.hypot(o.x - e.x, o.y - e.y) < 90) {
-        o.hp = Math.min(o.maxHp, o.hp + o.maxHp * 0.1);
-        G.parts.push({ x: o.x, y: o.y, vx: 0, vy: -30, life: .6, max: .6, color: '#7dffb0', size: 3 });
-      }
-    }
-    if (e.d.jam && e.t >= 4) {
-      e.t = 0;
-      let best = null, bd = 100;
-      for (const t of G.towers) { const dd = Math.hypot(t.x - e.x, t.y - e.y); if (dd < bd) { bd = dd; best = t; } }
-      if (best) { best.jam = 2.5; addFloat(best.x, best.y - 22, '해킹!', '#ff5d5d'); }
-    }
-    if (e.d.summon && e.t >= 3) { e.t = 0; spawnEnemy(e.d.summon, e.dist, e.dir); }
+    const p = enemyPos(e); e.x = p.x; e.y = p.y;
   }
   G.enemies = G.enemies.filter(e => !e.dead);
 }
 
 /* ---------- 타워 ---------- */
-function tStat(t) {
-  const d = t.def, l = t.lv - 1, h = t.hidden;
+function auraOf(t) {
+  let dmg = 0, rate = 0;
+  for (const o of G.towers) {
+    if (o === t || !o.def.auraR) continue;
+    if (Math.hypot(o.x - t.x, o.y - t.y) > o.def.auraR) continue;
+    if (o.def.auraDmg) dmg = Math.max(dmg, o.def.auraDmg);
+    if (o.def.auraRate) rate = Math.max(rate, o.def.auraRate);
+  }
+  return { dmg, rate };
+}
+function hasSmoke(t) {
+  return G.towers.some(o => o.def.smoke && Math.hypot(o.x - t.x, o.y - t.y) <= o.def.range);
+}
+function tStat(t, lvOverride) {
+  const d = t.def, l = (lvOverride || t.lv) - 1, a = auraOf(t);
+  if (d.money) {
+    const tier = MONEY_TIERS[lvOverride !== undefined ? lvOverride : t.tier];
+    const mul = (1 + 0.15 * G.research.money) * (1 + 0.05 * mlv('money'));
+    return { gold: tier.gold * mul, rate: tier.rate * (1 + a.rate) };
+  }
+  if (!d.dmg) return {};
   return {
-    dmg: d.dmg ? d.dmg * (1 + (d.dmgGrow || 0.4) * l) * G.dmgMul * (h ? h.dmg : 1) : 0,
-    rate: d.rate ? d.rate * (1 + 0.08 * l) * (h ? h.rate : 1) : 0,
-    range: d.range ? d.range * (1 + 0.05 * l) * (h ? h.range : 1) : 0,
-    income: d.income ? d.income + d.incomeLv * l : 0,
-    splash: h && h.splash ? h.splash : d.splash || 0,
-    hitGold: d.hitGold ? d.hitGold + d.hitGoldLv * l : 0,
+    dmg: d.dmg * (1 + 0.5 * l) * (1 + 0.1 * G.research.dmg) * (G.items.drum ? 1.2 : 1) * (1 + 0.05 * mlv('dmg'))
+         * (1 + a.dmg) * (1 + (d.growth || 0) * (t.kills || 0)),
+    rate: d.rate * (1 + 0.08 * l) * (1 + 0.08 * G.research.rate) * (1 + a.rate),
+    range: d.range * (1 + 0.04 * l),
+    targets: (d.targets || 1) + (G.items.staff ? 1 : 0),
   };
 }
-function targetScore(e) {
-  // 돈을 들고 도망치는 적 > 금고에 가까운 적
-  return e.carry > 0 ? 1e6 + (PATH_LEN - e.dist) : e.dist;
+function nearestWorker(t) {
+  let best = null, bd = t.def.range;
+  for (const o of G.towers) if (o.def.worker) { const dd = Math.hypot(o.x - t.x, o.y - t.y); if (dd <= bd) { bd = dd; best = o; } }
+  return best;
 }
 function updateTowers(dt) {
   for (const t of G.towers) {
-    if (t.def.income) continue;
-    if (t.jam > 0) { t.jam -= dt; continue; }
+    const d = t.def;
+    if (t.fire > 0) t.fire -= dt;
+    if (d.money) {
+      const w = nearestWorker(t); t.target = w;
+      if (!w) continue;
+      t.cd -= dt; if (t.cd > 0) continue;
+      const s = tStat(t);
+      t.cd = 1 / s.rate; t.fire = 0.1; t.ang = Math.atan2(w.y - t.y, w.x - t.x);
+      G.gold += s.gold; G.stats.moneyGold += s.gold; G.incomeWin.push([G.time, s.gold]);
+      w.shake = 0.12;
+      G.bullets.push({ x: t.x, y: t.y, tx: w.x, ty: w.y, spd: 380, coin: true });
+      t.acc = (t.acc || 0) + s.gold;
+      if (t.acc >= 15) { addFloat(w.x + (Math.random() - .5) * 16, w.y - 18, `+${Math.floor(t.acc)}`, '#ffe58a'); t.acc -= Math.floor(t.acc); }
+      continue;
+    }
+    if (!d.dmg) continue;
+    if (d.needSmoke && !hasSmoke(t)) { t.noSmoke = true; continue; }
+    t.noSmoke = false;
     t.cd -= dt; if (t.cd > 0) continue;
     const s = tStat(t);
-    let tgt = null, best = -1;
+    const cands = [];
     for (const e of G.enemies) {
-      if (e.dead || e.dist <= 0) continue;
+      if (e.dead || (e.kind.air && !d.air)) continue;
       if (Math.hypot(e.x - t.x, e.y - t.y) > s.range) continue;
-      const sc = targetScore(e); if (sc > best) { best = sc; tgt = e; }
+      cands.push(e);
     }
-    if (!tgt) continue;
-    t.cd = 1 / s.rate; t.ang = Math.atan2(tgt.y - t.y, tgt.x - t.x); t.fire = 0.1;
-    if (t.def.pierce) {
-      hitEnemy(tgt, s.dmg, true, t);
-      G.beams.push({ x0: t.x, y0: t.y, x1: tgt.x, y1: tgt.y, life: .15, color: t.def.color });
-    } else {
-      G.bullets.push({ x: t.x, y: t.y, tgt, tx: tgt.x, ty: tgt.y, spd: 460, dmg: s.dmg, def: t.def, t, splash: s.splash, color: t.hidden ? '#ff7ad9' : t.def.color });
-    }
+    if (!cands.length) continue;
+    cands.sort((a, b) => b.dist / (b.kind.air ? AIR_LEN : PATH_LEN) - a.dist / (a.kind.air ? AIR_LEN : PATH_LEN));
+    t.cd = 1 / s.rate; t.fire = 0.1;
+    const tg = cands.slice(0, s.targets);
+    t.ang = Math.atan2(tg[0].y - t.y, tg[0].x - t.x);
+    for (const e of tg) G.bullets.push({ x: t.x, y: t.y, tgt: e, tx: e.x, ty: e.y, spd: 480, dmg: s.dmg, t, color: d.color });
   }
 }
 function updateBullets(dt) {
   for (const b of G.bullets) {
     if (b.tgt && !b.tgt.dead) { b.tx = b.tgt.x; b.ty = b.tgt.y; }
     const dx = b.tx - b.x, dy = b.ty - b.y, dd = Math.hypot(dx, dy), step = b.spd * dt;
-    if (dd <= step + 4) {
-      b.done = true;
-      const d = b.def;
-      if (b.splash) {
-        for (const e of G.enemies) if (!e.dead && Math.hypot(e.x - b.tx, e.y - b.ty) <= b.splash) hitEnemy(e, b.dmg, false, b.t);
-        G.parts.push({ ring: true, x: b.tx, y: b.ty, r: b.splash, life: .25, max: .25, color: b.color });
-      } else if (b.tgt && !b.tgt.dead) {
-        if (d.slow) { b.tgt.slowT = d.slowT; b.tgt.slowAmt = d.slow; }
-        hitEnemy(b.tgt, b.dmg, false, b.t);
-      }
-    } else { b.x += dx / dd * step; b.y += dy / dd * step; }
+    if (dd > step + 4) { b.x += dx / dd * step; b.y += dy / dd * step; continue; }
+    b.done = true;
+    if (b.coin) continue;
+    const d = b.t.def;
+    const victims = d.splash
+      ? G.enemies.filter(e => !e.dead && (!e.kind.air || d.air) && Math.hypot(e.x - b.tx, e.y - b.ty) <= d.splash)
+      : (b.tgt && !b.tgt.dead ? [b.tgt] : []);
+    if (d.splash) G.parts.push({ ring: true, x: b.tx, y: b.ty, r: d.splash, life: .3, max: .3, color: d.color });
+    for (const e of victims) {
+      if (d.slowA) { e.slowA = Math.max(e.slowA, d.slowA); e.slowAT = d.slowT; }
+      if (d.slowB) { e.slowB = Math.max(e.slowB, d.slowB); e.slowBT = d.slowT; }
+      if (d.stun && Math.random() < d.stun && !e.kind.boss) e.stunT = d.stunT;
+      hitEnemy(e, b.dmg, b.t);
+    }
   }
   G.bullets = G.bullets.filter(b => !b.done);
 }
 
 /* ---------- 건설 ---------- */
 const cellKey = (c, r) => c + ',' + r;
-function canPlace(c, r) {
+function canPlaceCell(c, r) {
   return c >= 0 && r >= 0 && c < COLS && r < ROWS && !BLOCK.has(cellKey(c, r)) && !G.grid[cellKey(c, r)];
 }
+function buildLock(type) {
+  const d = TOWERS[type];
+  if (d.max && countOf(type) >= d.max) return `최대 ${d.max}개`;
+  if (d.needLab && !hasType('lab')) return '연구소 필요';
+  return '';
+}
+function canAfford(type) { const d = TOWERS[type]; return G.gold >= d.cost && G.lumber >= (d.lumber || 0); }
 function placeTower(c, r, type) {
-  const def = TOWERS[type];
-  if (!canPlace(c, r) || G.money < def.cost) return false;
-  G.money -= def.cost;
-  const t = { type, def, c, r, x: (c + .5) * TILE, y: (r + .5) * TILE, lv: 1, cd: 0, jam: 0, ang: -Math.PI / 2, fire: 0, invested: def.cost };
+  const d = TOWERS[type];
+  if (!canPlaceCell(c, r) || buildLock(type) || !canAfford(type)) return false;
+  G.gold -= d.cost; G.lumber -= d.lumber || 0;
+  const t = { type, def: d, c, r, x: (c + .5) * TILE, y: (r + .5) * TILE, lv: 1, tier: 0, cd: 0, ang: -Math.PI / 2, fire: 0, invested: d.cost, kills: 0, shake: 0 };
   G.towers.push(t); G.grid[cellKey(c, r)] = t;
-  burst(t.x, t.y, def.color, 8);
+  burst(t.x, t.y, d.color, 10);
+  if (d.max && countOf(type) >= d.max) G.build = null;
+  if (d.tab === 'hero') toast(`${d.icon} <b>${d.name}</b> 등장!`);
   return true;
 }
 function upgradeTower(t) {
-  if (!t || t.lv >= CFG.maxLv) return;
-  const c = upCost(t); if (G.money < c) return;
-  G.money -= c; t.invested += c; t.lv++;
-  addFloat(t.x, t.y - 22, `Lv.${t.lv}`, '#3ddc84'); burst(t.x, t.y, '#3ddc84', 8);
-  if (t.def.hero && !t.hidden) {
-    let r = Math.random();
-    for (const h of HIDDEN_HEROES) {
-      if (r < h.chance) {
-        t.hidden = h; burst(t.x, t.y, '#ff7ad9', 40);
-        toast(`✨ 히든 영웅 등장! ${h.icon} <b>${h.name}</b> — ${h.desc}`);
-        G.banner = { text: `✨ 히든 영웅 ${h.name}!`, t: 0, boss: false };
-        break;
-      }
-      r -= h.chance;
-    }
+  if (!t) return;
+  if (t.def.money) {
+    const nx = MONEY_TIERS[t.tier + 1]; if (!nx || G.gold < nx.up) return;
+    G.gold -= nx.up; t.invested += nx.up; t.tier++;
+    addFloat(t.x, t.y - 22, nx.name, '#3ddc84'); burst(t.x, t.y, '#f5c542', 12);
+    return;
   }
+  if (!t.def.dmg || t.lv >= CFG.maxLv) return;
+  const c = upCost(t); if (G.gold < c) return;
+  G.gold -= c; t.invested += c; t.lv++;
+  addFloat(t.x, t.y - 22, `${t.lv}단`, '#3ddc84'); burst(t.x, t.y, '#3ddc84', 8);
 }
 function sellTower(t) {
   if (!t) return;
   const v = Math.floor(t.invested * CFG.sellRate);
-  G.money += v; addFloat(t.x, t.y - 20, `+${v}`, '#f5c542');
+  G.gold += v; addFloat(t.x, t.y - 20, `+${v}`, '#f5c542');
   G.towers = G.towers.filter(x => x !== t); delete G.grid[cellKey(t.c, t.r)];
   selectTower(null);
 }
+function doResearch(id) {
+  const r = RESEARCH.find(x => x.id === id), l = G.research[id];
+  if (l >= r.max || G.lumber < r.cost(l)) return;
+  G.lumber -= r.cost(l); G.research[id]++;
+  toast(`🔬 ${r.name} ${G.research[id]}단계 완료`);
+}
+function exchange() { if (G.gold < EXCHANGE.gold) return; G.gold -= EXCHANGE.gold; G.lumber += EXCHANGE.lumber; }
+function buyItem(id) {
+  const it = ITEMS.find(x => x.id === id);
+  if (G.items[id] || G.gold < it.cost) return;
+  G.gold -= it.cost; G.items[id] = true;
+  toast(`${it.icon} <b>${it.name}</b> 구입 — ${it.desc}`);
+}
 
 /* ---------- 이펙트 ---------- */
-function addFloat(x, y, text, color) { G.floats.push({ x, y, text, color, t: 0 }); }
+function addFloat(x, y, text, color) { G.floats.push({ x, y, text, color, t: 0 }); if (G.floats.length > 80) G.floats.shift(); }
 function burst(x, y, color, n) {
   for (let i = 0; i < n; i++) {
     const a = Math.random() * Math.PI * 2, s = 40 + Math.random() * 110;
@@ -584,36 +634,38 @@ function updateFx(dt) {
   G.parts = G.parts.filter(p => p.life > 0);
   for (const f of G.floats) f.t += dt;
   G.floats = G.floats.filter(f => f.t < 1.1);
-  for (const b of G.beams) b.life -= dt;
-  G.beams = G.beams.filter(b => b.life > 0);
-  for (const t of G.towers) if (t.fire > 0) t.fire -= dt;
-  if (G.shake > 0) G.shake -= dt;
-  if (G.banner) { G.banner.t += dt; if (G.banner.t > 2.2) G.banner = null; }
+  for (const t of G.towers) if (t.shake > 0) t.shake -= dt;
+  if (G.banner) { G.banner.t += dt; if (G.banner.t > 2.6) G.banner = null; }
+  while (G.incomeWin.length && G.incomeWin[0][0] < G.time - 10) G.incomeWin.shift();
 }
 
 /* ---------- 메인 업데이트 ---------- */
 function update(dt) {
+  G.time += dt;
   if (G.inWave) {
     if (G.queue.length) {
       G.spawnT -= dt;
-      if (G.spawnT <= 0) { const q = G.queue.shift(); spawnEnemy(q.id); G.spawnT = q.gap; }
+      if (G.spawnT <= 0) { const q = G.queue.shift(); spawnEnemy(q.kind); G.spawnT = CFG.spawnGap(G.round) * (q.kind.air ? 0.7 : 1); }
     } else if (!G.enemies.length) endWave();
   }
   updateEnemies(dt);
   updateTowers(dt);
   updateBullets(dt);
   updateFx(dt);
-  if (G.money < -G.credit) gameOver();
+  if (G.lives <= 0 && !G.over) { G.lives = 0; finish(false); }
 }
-function gameOver() {
+function finish(win) {
   if (G.over) return;
-  G.over = true; G.paused = false;
-  const cleared = Math.max(0, G.wave - 1);
-  const bars = barsFor(cleared);
-  save.bars += bars; save.runs++; save.best = Math.max(save.best, G.wave); persist();
+  G.over = true; G.won = win; G.paused = false;
+  const cleared = win ? CFG.rounds : Math.max(0, G.round - 1);
+  const bars = barsFor(cleared, win);
+  save.bars += bars; save.runs++; save.best = Math.max(save.best, G.round);
+  if (win) save.clears++;
+  persist();
+  $('overTitle').textContent = win ? '🎉 클리어!' : '💀 패배';
   $('overRows').innerHTML =
-    `도달 웨이브 <b>${G.wave}</b><br>처치 <b>${G.stats.kills}</b><br>도난액 <b>${Math.round(G.stats.stolen)}G</b><br>` +
-    `회수액 <b>${G.stats.recovered}G</b><br>삥 수입 <b>${Math.floor(G.stats.hitGold)}G</b><br>받은 이자 <b>${G.stats.interest}G</b>`;
+    `도달 라운드 <b>${G.round} / ${CFG.rounds}</b><br>처치 <b>${G.stats.kills}</b><br>놓친 몹 <b>${G.stats.leaks}</b><br>` +
+    `돈타워 수입 <b>${fmt(G.stats.moneyGold)}G</b><br>아저씨 삥 <b>${fmt(G.stats.extort)}G</b><br>얻은 목재 <b>${G.stats.lumber}</b>`;
   $('overEarn').textContent = `골드바 +${bars} 🟨`;
   $('overOv').classList.add('on');
 }
@@ -631,125 +683,123 @@ bg.width = W * DPR; bg.height = H * DPR;
 (function drawBg() {
   const b = bg.getContext('2d'); b.scale(DPR, DPR);
   for (let c = 0; c < COLS; c++) for (let r = 0; r < ROWS; r++) {
-    b.fillStyle = (c + r) % 2 ? '#1a3a27' : '#1c3e2a'; b.fillRect(c * TILE, r * TILE, TILE, TILE);
+    b.fillStyle = (c + r) % 2 ? '#1d3b28' : '#1f3f2b'; b.fillRect(c * TILE, r * TILE, TILE, TILE);
   }
-  // 잔디 점
-  for (let i = 0; i < 260; i++) { b.fillStyle = 'rgba(120,200,140,.07)'; b.fillRect(Math.random() * W, Math.random() * H, 2, 2); }
-  b.lineJoin = 'round'; b.lineCap = 'round';
+  for (let i = 0; i < 300; i++) { b.fillStyle = 'rgba(140,210,150,.07)'; b.fillRect(Math.random() * W, Math.random() * H, 2, 2); }
+  // 눈 덮인 길
+  b.lineJoin = 'miter'; b.lineCap = 'butt';
   const line = (w, col) => { b.strokeStyle = col; b.lineWidth = w; b.beginPath(); PX.forEach(([x, y], i) => i ? b.lineTo(x, y) : b.moveTo(x, y)); b.stroke(); };
-  line(38, '#4b3b25'); line(32, '#b89a68'); line(26, '#c8ab78');
-  b.setLineDash([6, 10]); line(2, 'rgba(90,70,40,.35)'); b.setLineDash([]);
-  // 입구 표시
-  b.fillStyle = 'rgba(255,93,93,.85)'; b.font = 'bold 12px "Malgun Gothic",sans-serif'; b.textAlign = 'left';
-  b.fillText('입구 ▶', 4, PX[1][1] - 22);
-  // 그리드 선
-  b.strokeStyle = 'rgba(0,0,0,.12)'; b.lineWidth = 1;
+  line(40, '#6e8ea8'); line(34, '#c9dcea'); line(28, '#e6f0f7');
+  for (let i = 0; i < 500; i++) {
+    const p = posAt(Math.random() * PATH_LEN);
+    b.fillStyle = Math.random() < .5 ? 'rgba(160,190,215,.55)' : 'rgba(255,255,255,.9)';
+    b.fillRect(p.x + (Math.random() - .5) * 26, p.y + (Math.random() - .5) * 26, 2, 2);
+  }
+  // 공중 경로 표시
+  b.setLineDash([3, 9]); b.strokeStyle = 'rgba(111,214,255,.22)'; b.lineWidth = 2;
+  b.beginPath(); b.moveTo(AIR_A.x, AIR_A.y); b.lineTo(AIR_B.x, AIR_B.y); b.stroke(); b.setLineDash([]);
+  b.font = 'bold 12px "Malgun Gothic",sans-serif'; b.textAlign = 'left';
+  b.fillStyle = 'rgba(255,120,120,.95)'; b.fillText('▼ 입구', PX[0][0] + 22, 14);
+  b.fillStyle = 'rgba(255,120,120,.95)'; b.textAlign = 'right'; b.fillText('출구 ▶', W - 4, PX[PX.length - 1][1] - 24);
+  b.strokeStyle = 'rgba(0,0,0,.10)'; b.lineWidth = 1;
   for (let c = 0; c <= COLS; c++) { b.beginPath(); b.moveTo(c * TILE, 0); b.lineTo(c * TILE, H); b.stroke(); }
   for (let r = 0; r <= ROWS; r++) { b.beginPath(); b.moveTo(0, r * TILE); b.lineTo(W, r * TILE); b.stroke(); }
 })();
 
 function rr(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
-
-function drawVault() {
-  const x = VAULT.c * TILE + 4, y = VAULT.r * TILE + 4, w = VAULT.w * TILE - 8, h = VAULT.h * TILE - 8;
-  const g = ctx.createLinearGradient(x, y, x, y + h);
-  g.addColorStop(0, '#ffe07a'); g.addColorStop(.5, '#e2a923'); g.addColorStop(1, '#9b6a08');
-  ctx.fillStyle = g; rr(x, y, w, h, 8); ctx.fill();
-  ctx.strokeStyle = '#5a3d05'; ctx.lineWidth = 3; ctx.stroke();
-  ctx.fillStyle = '#7a5206'; ctx.beginPath(); ctx.arc(VX, VY, 20, 0, Math.PI * 2); ctx.fill();
-  ctx.strokeStyle = '#ffe9a6'; ctx.lineWidth = 2; ctx.stroke();
-  for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3 + performance.now() / 4000; ctx.beginPath(); ctx.moveTo(VX, VY); ctx.lineTo(VX + Math.cos(a) * 17, VY + Math.sin(a) * 17); ctx.stroke(); }
-  ctx.fillStyle = '#ffe9a6'; ctx.font = 'bold 18px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillText('$', VX, VY + 1);
-  ctx.font = 'bold 13px "Malgun Gothic",sans-serif';
-  ctx.fillStyle = G.money < 0 ? '#ff7a7a' : '#ffe58a';
-  ctx.fillText(`${Math.floor(G.money)}G`, VX, y + h + 14);
+function emoji(ch, x, y, size, alpha) {
+  ctx.globalAlpha = alpha == null ? 1 : alpha;
+  ctx.fillStyle = '#fff';   // 컬러 이모지도 fillStyle 알파를 따라가므로 불투명으로
+  ctx.font = `${size}px ${EMOJI}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(ch, x, y + 1); ctx.globalAlpha = 1;
 }
+function iconOf(t) { return t.def.money ? MONEY_TIERS[t.tier].icon : t.def.icon; }
+
 function drawTower(t) {
-  const d = t.def;
-  ctx.fillStyle = '#0f1a14'; rr(t.x - 17, t.y - 17, 34, 34, 7); ctx.fill();
-  ctx.strokeStyle = d.color; ctx.lineWidth = G.sel === t ? 2.5 : 1.5; ctx.stroke();
-  if (!d.income) {
-    // 포신
+  const d = t.def, hero = d.tab === 'hero';
+  const sx = t.shake > 0 ? (Math.random() - .5) * 4 : 0;
+  ctx.fillStyle = hero ? '#2a1a2a' : '#0f1a14'; rr(t.x - 17 + sx, t.y - 17, 34, 34, hero ? 17 : 7); ctx.fill();
+  ctx.strokeStyle = d.color; ctx.lineWidth = G.sel === t ? 2.6 : 1.4; ctx.stroke();
+  if (d.dmg && !hero) {
     ctx.strokeStyle = d.color; ctx.lineWidth = 4; ctx.lineCap = 'round';
     const L = 15 + (t.fire > 0 ? -3 : 0);
     ctx.beginPath(); ctx.moveTo(t.x, t.y); ctx.lineTo(t.x + Math.cos(t.ang) * L, t.y + Math.sin(t.ang) * L); ctx.stroke();
   }
-  ctx.fillStyle = d.color + '33'; ctx.beginPath(); ctx.arc(t.x, t.y, 12, 0, Math.PI * 2); ctx.fill();
-  ctx.font = `17px ${EMOJI}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillStyle = '#fff';  // 컬러 이모지도 fillStyle 의 알파를 따라가므로 불투명으로
-  ctx.fillText(t.hidden ? t.hidden.icon : d.icon, t.x, t.y + 1);
-  if (t.hidden) { ctx.strokeStyle = '#ff7ad9'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(t.x, t.y, 19 + Math.sin(performance.now() / 200) * 1.5, 0, Math.PI * 2); ctx.stroke(); }
-  // 레벨 표시
-  ctx.fillStyle = '#0f1a14'; rr(t.x + 5, t.y + 8, 14, 11, 3); ctx.fill();
-  ctx.fillStyle = t.lv >= CFG.maxLv ? '#f5c542' : '#e9f2ec'; ctx.font = 'bold 9px sans-serif';
-  ctx.fillText(t.lv >= CFG.maxLv ? 'M' : t.lv, t.x + 12, t.y + 14);
-  if (t.jam > 0) {
-    ctx.fillStyle = 'rgba(255,60,60,.35)'; rr(t.x - 17, t.y - 17, 34, 34, 7); ctx.fill();
-    ctx.strokeStyle = 'rgba(255,255,255,.5)'; ctx.lineWidth = 1;
-    for (let i = 0; i < 4; i++) { const yy = t.y - 14 + Math.random() * 28; ctx.beginPath(); ctx.moveTo(t.x - 15, yy); ctx.lineTo(t.x + 15, yy); ctx.stroke(); }
+  emoji(iconOf(t), t.x + sx, t.y, 18);
+  if (d.dmg || d.money) {
+    const label = d.money ? `${t.tier + 1}` : (t.lv >= CFG.maxLv ? 'M' : t.lv);
+    ctx.fillStyle = '#0f1a14'; rr(t.x + 5, t.y + 8, 14, 11, 3); ctx.fill();
+    ctx.fillStyle = (d.money ? t.tier >= MONEY_TIERS.length - 1 : t.lv >= CFG.maxLv) ? '#f5c542' : '#e9f2ec';
+    ctx.font = 'bold 9px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(label, t.x + 12, t.y + 14);
   }
+  if (d.money && !t.target) emoji('💤', t.x - 12, t.y - 13, 11);
+  if (t.noSmoke) emoji('🚭', t.x - 12, t.y - 13, 12);
+  if (d.growth && t.kills >= 10) { ctx.fillStyle = '#ff9a5c'; ctx.font = 'bold 9px sans-serif'; ctx.fillText(`+${t.kills}%`, t.x - 8, t.y - 13); }
 }
 function drawEnemy(e) {
-  const r = e.d.r;
-  if (e.draining) {
-    ctx.strokeStyle = 'rgba(255,93,93,.5)'; ctx.setLineDash([4, 6]); ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(e.x, e.y); ctx.lineTo(VX, VY); ctx.stroke(); ctx.setLineDash([]);
-  }
-  ctx.fillStyle = 'rgba(0,0,0,.3)'; ctx.beginPath(); ctx.ellipse(e.x, e.y + r * .8, r, r * .4, 0, 0, Math.PI * 2); ctx.fill();
-  ctx.fillStyle = e.hitT > 0 ? '#fff' : e.d.color;
+  const k = e.kind, r = k.boss ? (k.final ? 22 : 19) : k.air ? 11 : 10;
+  if (k.air) { ctx.fillStyle = 'rgba(0,0,0,.25)'; ctx.beginPath(); ctx.ellipse(e.x + 6, e.y + 16, r * .9, r * .35, 0, 0, Math.PI * 2); ctx.fill(); }
+  else { ctx.fillStyle = 'rgba(0,0,0,.3)'; ctx.beginPath(); ctx.ellipse(e.x, e.y + r * .8, r, r * .4, 0, 0, Math.PI * 2); ctx.fill(); }
+  ctx.fillStyle = e.hitT > 0 ? '#fff' : k.color;
   ctx.beginPath(); ctx.arc(e.x, e.y, r, 0, Math.PI * 2); ctx.fill();
-  ctx.lineWidth = 2; ctx.strokeStyle = e.carry > 0 ? '#f5c542' : (e.slowT > 0 ? '#6fd6ff' : 'rgba(0,0,0,.6)'); ctx.stroke();
-  ctx.font = `${Math.round(r * 1.25)}px ${EMOJI}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillText(e.d.icon, e.x, e.y + 1);
+  ctx.lineWidth = 2;
+  ctx.strokeStyle = e.stunT > 0 ? '#ffe066' : (e.slowA || e.slowB) ? '#6fd6ff' : 'rgba(0,0,0,.6)'; ctx.stroke();
+  emoji(k.icon, e.x, e.y, Math.round(r * 1.3));
   if (e.hp < e.maxHp) {
     const w = Math.max(18, r * 2);
     ctx.fillStyle = '#300'; ctx.fillRect(e.x - w / 2, e.y - r - 8, w, 4);
-    ctx.fillStyle = e.d.boss ? '#ff9a3d' : '#5cff8f'; ctx.fillRect(e.x - w / 2, e.y - r - 8, w * Math.max(0, e.hp / e.maxHp), 4);
+    ctx.fillStyle = k.boss ? '#ff9a3d' : '#5cff8f'; ctx.fillRect(e.x - w / 2, e.y - r - 8, w * Math.max(0, e.hp / e.maxHp), 4);
   }
-  if (e.carry > 0) {
-    ctx.font = `13px ${EMOJI}`; ctx.fillText('💰', e.x + r * .8, e.y - r * .8);
-    ctx.font = 'bold 10px sans-serif'; ctx.fillStyle = '#ffe58a';
-    ctx.fillText(Math.round(e.carry), e.x, e.y + r + 9);
-  }
+  if (e.stunT > 0) emoji('💫', e.x, e.y - r - 4, 11);
 }
 function draw() {
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-  ctx.save();
-  if (G.shake > 0) ctx.translate((Math.random() - .5) * 6, (Math.random() - .5) * 6);
   ctx.drawImage(bg, 0, 0, W, H);
 
-  // 선택한 타워 사거리
-  if (G.sel && G.sel.def.range) {
-    ctx.fillStyle = 'rgba(255,255,255,.06)'; ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.arc(G.sel.x, G.sel.y, tStat(G.sel).range, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+  const sel = G.sel;
+  if (sel) {
+    const R = sel.def.range ? (sel.def.dmg ? tStat(sel).range : sel.def.range) : 0;
+    if (R) {
+      ctx.fillStyle = 'rgba(255,255,255,.06)'; ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(sel.x, sel.y, R, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    }
+    if (sel.def.auraR) {
+      ctx.strokeStyle = sel.def.color + 'aa'; ctx.setLineDash([5, 6]);
+      ctx.beginPath(); ctx.arc(sel.x, sel.y, sel.def.auraR, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+    }
   }
-  drawVault();
+  // 흡연구역 연기 범위는 아저씨가 있을 때 은은하게
+  if (hasType('uncle')) for (const t of G.towers) if (t.def.smoke) {
+    ctx.fillStyle = 'rgba(180,180,180,.05)'; ctx.beginPath(); ctx.arc(t.x, t.y, t.def.range, 0, Math.PI * 2); ctx.fill();
+  }
+  // 오라 범위 은은하게
+  for (const t of G.towers) if (t.def.auraR && t !== sel) {
+    ctx.strokeStyle = t.def.color + '33'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(t.x, t.y, t.def.auraR, 0, Math.PI * 2); ctx.stroke();
+  }
   for (const t of G.towers) drawTower(t);
 
   // 건설 미리보기
   if (G.build && G.hover) {
-    const { c, r } = G.hover, ok = canPlace(c, r) && G.money >= TOWERS[G.build].cost;
-    const x = (c + .5) * TILE, y = (r + .5) * TILE, def = TOWERS[G.build];
+    const { c, r } = G.hover, def = TOWERS[G.build];
+    const ok = canPlaceCell(c, r) && !buildLock(G.build) && canAfford(G.build);
+    const x = (c + .5) * TILE, y = (r + .5) * TILE;
     ctx.fillStyle = ok ? 'rgba(61,220,132,.25)' : 'rgba(255,93,93,.3)'; ctx.fillRect(c * TILE, r * TILE, TILE, TILE);
-    if (def.range) {
-      ctx.strokeStyle = ok ? 'rgba(61,220,132,.6)' : 'rgba(255,93,93,.5)'; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.arc(x, y, def.range, 0, Math.PI * 2); ctx.stroke();
+    const R = def.range || 0;
+    if (R) { ctx.strokeStyle = ok ? 'rgba(61,220,132,.6)' : 'rgba(255,93,93,.5)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(x, y, R, 0, Math.PI * 2); ctx.stroke(); }
+    if (def.money) for (const o of G.towers) if (o.def.worker && Math.hypot(o.x - x, o.y - y) <= R) {
+      ctx.strokeStyle = 'rgba(245,197,66,.8)'; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(o.x, o.y); ctx.stroke(); ctx.setLineDash([]);
     }
-    ctx.globalAlpha = .7; ctx.fillStyle = '#fff'; ctx.font = `18px ${EMOJI}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText(def.icon, x, y + 1); ctx.globalAlpha = 1;
+    emoji(def.icon, x, y, 18, .7);
   }
 
-  for (const e of G.enemies) drawEnemy(e);
+  for (const e of G.enemies) if (!e.kind.air) drawEnemy(e);
+  for (const e of G.enemies) if (e.kind.air) drawEnemy(e);
 
   for (const b of G.bullets) {
-    const d = b.def;
-    if (d === TOWERS.bill) { ctx.fillStyle = '#3ddc84'; ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(Math.atan2(b.ty - b.y, b.tx - b.x)); ctx.fillRect(-6, -3, 12, 6); ctx.restore(); }
-    else { ctx.fillStyle = b.color; ctx.beginPath(); ctx.arc(b.x, b.y, d.hero ? 5 : 3.5, 0, Math.PI * 2); ctx.fill(); }
-  }
-  for (const b of G.beams) {
-    ctx.strokeStyle = b.color; ctx.globalAlpha = b.life / .15; ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.moveTo(b.x0, b.y0); ctx.lineTo(b.x1, b.y1); ctx.stroke(); ctx.globalAlpha = 1;
+    if (b.coin) { ctx.fillStyle = '#ffd34d'; ctx.beginPath(); ctx.arc(b.x, b.y, 3.2, 0, Math.PI * 2); ctx.fill(); ctx.strokeStyle = '#8a5d05'; ctx.lineWidth = 1; ctx.stroke(); }
+    else { ctx.fillStyle = b.color; ctx.beginPath(); ctx.arc(b.x, b.y, b.t.def.tab === 'hero' ? 5 : 3.5, 0, Math.PI * 2); ctx.fill(); }
   }
   for (const p of G.parts) {
     const a = p.life / p.max; ctx.globalAlpha = a;
@@ -757,19 +807,18 @@ function draw() {
     else { ctx.fillStyle = p.color; ctx.fillRect(p.x - p.size / 2, p.y - p.size / 2, p.size, p.size); }
   }
   ctx.globalAlpha = 1;
-  ctx.font = 'bold 13px "Malgun Gothic",sans-serif'; ctx.textAlign = 'center';
+  ctx.font = 'bold 13px "Malgun Gothic",sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   for (const f of G.floats) {
     ctx.globalAlpha = Math.max(0, 1 - f.t / 1.1); ctx.fillStyle = '#000';
     ctx.fillText(f.text, f.x + 1, f.y - f.t * 30 + 1); ctx.fillStyle = f.color; ctx.fillText(f.text, f.x, f.y - f.t * 30);
   }
   ctx.globalAlpha = 1;
-  ctx.restore();
 
   if (G.banner) {
-    const a = Math.min(1, G.banner.t * 4, (2.2 - G.banner.t) * 2);
+    const a = Math.min(1, G.banner.t * 4, (2.6 - G.banner.t) * 2);
     ctx.globalAlpha = Math.max(0, a);
-    ctx.fillStyle = 'rgba(0,0,0,.55)'; ctx.fillRect(0, H / 2 - 34, W, 68);
-    ctx.font = 'bold 34px "Malgun Gothic",sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = 'rgba(0,0,0,.6)'; ctx.fillRect(0, H / 2 - 32, W, 64);
+    ctx.font = 'bold 28px "Malgun Gothic",sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillStyle = G.banner.boss ? '#ff7a5c' : '#ffe58a'; ctx.fillText(G.banner.text, W / 2, H / 2);
     ctx.globalAlpha = 1;
   }
@@ -791,91 +840,135 @@ function toast(html) {
   while ($('toasts').children.length > 4) $('toasts').firstChild.remove();
 }
 
-// 건설 카드는 한 번만 만들고 이후엔 클래스만 갱신 (매 프레임 다시 그리면 클릭이 씹힘)
-const bcards = {};
-for (const [id, d] of Object.entries(TOWERS)) {
-  const el = document.createElement('div'); el.className = 'bcard';
-  el.innerHTML = `<span class="k">${d.key}</span><div class="ic">${d.icon}</div><div class="nm">${d.name}</div><div class="cs">${d.cost}G</div>`;
-  el.title = d.desc;
-  el.addEventListener('click', () => selectBuild(G.build === id ? null : id));
-  $('buildList').appendChild(el); bcards[id] = el;
+// 탭·카드는 탭이 바뀔 때만 다시 만든다 (매 프레임 다시 그리면 클릭이 씹힘)
+function buildTabs() {
+  const box = $('tabs'); box.innerHTML = '';
+  for (const tb of TABS) {
+    const b = document.createElement('button'); b.textContent = tb.name; b.dataset.id = tb.id;
+    b.onclick = () => { G.tab = tb.id; renderBuildList(); };
+    box.appendChild(b);
+  }
 }
-function selectBuild(id) { if (G) { G.build = id; if (id) G.sel = null; } }
-function selectTower(t) { if (G) { G.sel = t; if (t) G.build = null; } }
+let bcards = {};
+function renderBuildList() {
+  const box = $('buildList'); box.innerHTML = ''; bcards = {};
+  let i = 0;
+  for (const [id, d] of Object.entries(TOWERS)) {
+    if (d.tab !== G.tab) continue; i++;
+    const el = document.createElement('div'); el.className = 'bcard';
+    el.innerHTML = `<span class="k">${i}</span><div class="ic">${d.icon}</div><div class="nm">${d.name}</div>` +
+      `<div class="cs">${d.cost}G${d.lumber ? ` <i>· 목재 ${d.lumber}</i>` : ''}</div><span class="lock"></span>`;
+    el.title = d.desc;
+    el.addEventListener('click', () => selectBuild(G.build === id ? null : id));
+    box.appendChild(el); bcards[id] = el;
+  }
+  for (const b of $('tabs').children) b.classList.toggle('on', b.dataset.id === G.tab);
+}
+function selectBuild(id) { if (!G) return; if (id && buildLock(id)) { toast(buildLock(id)); return; } G.build = id; if (id) selectTower(null); }
+
+// 선택 패널: 선택이 바뀔 때만 버튼을 만들고, 매 프레임엔 글자·활성만 갱신
+let infoActs = [];
+function selectTower(t) {
+  if (!G) return;
+  G.sel = t; if (t) G.build = null;
+  const box = $('infoActs'); box.innerHTML = ''; infoActs = [];
+  if (!t) return;
+  const add = (cls, label, enabled, run) => {
+    const b = document.createElement('button'); if (cls) b.className = cls;
+    b.addEventListener('click', () => { if (enabled()) run(); });
+    box.appendChild(b); infoActs.push({ b, label, enabled });
+  };
+  const d = t.def;
+  if (d.money) add('', () => { const nx = MONEY_TIERS[t.tier + 1]; return nx ? `⬆ ${nx.name}(으)로 — ${nx.up}G (U)` : '최종 단계'; },
+    () => { const nx = MONEY_TIERS[t.tier + 1]; return !!nx && G.gold >= nx.up; }, () => upgradeTower(t));
+  if (d.dmg) add('', () => t.lv >= CFG.maxLv ? '최대 단계' : `⬆ ${t.lv + 1}단 — ${upCost(t)}G (U)`,
+    () => t.lv < CFG.maxLv && G.gold >= upCost(t), () => upgradeTower(t));
+  if (d.lab) {
+    for (const r of RESEARCH) add('alt', () => G.research[r.id] >= r.max ? `${r.name} 완료` : `🔬 ${r.name} ${G.research[r.id] + 1}단 — 목재 ${r.cost(G.research[r.id])}`,
+      () => G.research[r.id] < r.max && G.lumber >= r.cost(G.research[r.id]), () => doResearch(r.id));
+    add('alt', () => `🪵 목재 교환 — ${EXCHANGE.gold}G → 목재 ${EXCHANGE.lumber}`, () => G.gold >= EXCHANGE.gold, exchange);
+  }
+  if (d.store) for (const it of ITEMS) add('alt', () => G.items[it.id] ? `${it.icon} ${it.name} 보유 중` : `${it.icon} ${it.name} — ${it.cost}G`,
+    () => !G.items[it.id] && G.gold >= it.cost, () => buyItem(it.id));
+  add('sell', () => `판매 +${Math.floor(t.invested * CFG.sellRate)}G (S)`, () => true, () => sellTower(t));
+}
 
 function towerInfo(t) {
-  const s = tStat(t), d = t.def, nx = t.lv < CFG.maxLv ? tStat({ ...t, lv: t.lv + 1 }) : null;
-  const arrow = (a, b, f) => nx ? `${f(a)} → ${f(b)}` : f(a);
-  const lines = [d.desc];
-  if (t.hidden) lines.push(`✨ 히든: ${t.hidden.name} — ${t.hidden.desc}`);
-  else if (d.hero) lines.push(`강화 시 히든 확률: ${HIDDEN_HEROES.map(h => `${h.name} ${h.chance * 100}%`).join(' · ')}`);
-  if (d.hitGold) lines.push(`타격당 수입  ${arrow(s.hitGold, nx && nx.hitGold, v => v.toFixed(2) + 'G')}`);
-  if (d.income) lines.push(`웨이브 수입  ${arrow(s.income, nx && nx.income, v => v + 'G')}`);
-  else {
-    lines.push(`피해  ${arrow(s.dmg, nx && nx.dmg, v => v.toFixed(1))}`);
-    lines.push(`공격속도  ${arrow(s.rate, nx && nx.rate, v => v.toFixed(2) + '/s')}`);
-    lines.push(`사거리  ${arrow(s.range, nx && nx.range, v => Math.round(v))}`);
-    if (s.splash) lines.push(`폭발 범위  ${s.splash}`);
-    if (d.slow) lines.push(`둔화  ${d.slow * 100}% · ${d.slowT}초`);
-    if (t.jam > 0) lines.push(`⚠ 해킹으로 정지 ${t.jam.toFixed(1)}초`);
-  }
-  lines.push(`투자액  ${t.invested}G`);
-  return lines.join('\n');
+  const d = t.def, L = [d.desc];
+  if (d.money) {
+    const s = tStat(t), nx = MONEY_TIERS[t.tier + 1];
+    L.push(`타격당 ${s.gold.toFixed(1)}G · ${s.rate.toFixed(2)}회/초 → 초당 ${(s.gold * s.rate).toFixed(1)}G`);
+    if (nx) { const n = tStat(t, t.tier + 1); L.push(`다음 ${nx.name}: 초당 ${(n.gold * n.rate).toFixed(1)}G`); }
+    L.push(t.target ? '✔ 노동자를 때리는 중' : '✖ 사거리 안에 노동자가 없음 (쉬는 중)');
+  } else if (d.dmg) {
+    const s = tStat(t), n = t.lv < CFG.maxLv ? tStat(t, t.lv + 1) : null;
+    const ar = (a, b, f) => n ? `${f(a)} → ${f(b)}` : f(a);
+    L.push(`피해  ${ar(s.dmg, n && n.dmg, v => v.toFixed(1))}`);
+    L.push(`공속  ${ar(s.rate, n && n.rate, v => v.toFixed(2) + '/s')}`);
+    L.push(`사거리  ${Math.round(s.range)} · 대상 ${s.targets} · ${d.air ? '대공 가능' : '지상만'}`);
+    const a = auraOf(t);
+    if (a.dmg || a.rate) L.push(`받는 버프  ${a.dmg ? `피해 +${a.dmg * 100}% ` : ''}${a.rate ? `공속 +${a.rate * 100}%` : ''}`);
+    if (d.growth) L.push(`처치 ${t.kills} → 피해 +${t.kills}%`);
+    if (d.needSmoke) L.push(hasSmoke(t) ? '🚬 흡연구역 안 — 정상' : '🚭 흡연구역 밖 — 공격 안 함!');
+  } else if (d.worker) L.push(`때리는 돈타워 ${G.towers.filter(o => o.def.money && o.target === t).length}개`);
+  else if (d.lab) L.push(`공격력 ${G.research.dmg}/5 · 공속 ${G.research.rate}/5 · 돈타워 ${G.research.money}/5`);
+  if (!d.worker) L.push(`투자액  ${fmt(t.invested)}G`);
+  return L.join('\n');
 }
 
 function refreshUI() {
-  const m = $('money');
-  setText(m, `${fmt(G.money)}G`); m.classList.toggle('neg', G.money < 0);
-  const debt = Math.max(0, -G.money);
-  $('creditBar').style.width = `${Math.min(100, debt / G.credit * 100)}%`;
-  setText($('creditTxt'), G.money < 0 ? `빚 ${fmt(debt)}G / 파산 한도 ${G.credit}G` : `파산 한도 -${G.credit}G`);
-  setText($('waveTxt'), String(G.wave));
-  setText($('enemyTxt'), String(G.enemies.length + G.queue.length));
-  setText($('bestTxt'), String(save.best));
-  const intr = G.money > 0 ? Math.min(G.cap, Math.floor(G.money * G.rate)) : 0;
-  const bank = G.towers.reduce((a, t) => a + (t.def.income ? tStat(t).income : 0), 0);
-  setHTML($('interestTxt'), `웨이브 종료 시 이자 <b>+${intr}G</b> (${Math.round(G.rate * 100)}%, 최대 ${G.cap}G)` +
-    (bank ? ` · 은행 <b>+${bank}G</b>` : ''));
+  setText($('goldTxt'), fmt(G.gold));
+  setText($('lumberTxt'), String(G.lumber));
+  setText($('livesTxt'), String(G.lives));
+  setText($('roundTxt'), `${G.round}/${CFG.rounds}`);
+  const ips = G.incomeWin.reduce((a, x) => a + x[1], 0) / 10;
+  const nMoney = G.towers.filter(t => t.def.money).length, idle = G.towers.filter(t => t.def.money && !t.target).length;
+  setHTML($('incomeTxt'), `돈타워 ${nMoney}개 · 초당 수입 <b>${ips.toFixed(1)}G</b>` + (idle ? ` · <span style="color:#ff9a9a">쉬는 돈타워 ${idle}</span>` : '') +
+    (!hasType('worker') ? '<br><span style="color:#ff9a9a">노동자부터 지으세요!</span>' : ''));
 
   const wb = $('waveBtn');
-  if (G.over) { setText(wb, '파산'); wb.disabled = true; }
-  else if (G.inWave) { setText(wb, `웨이브 ${G.wave} 진행 중`); wb.disabled = true; }
-  else { setText(wb, G.countdown > 0 ? `웨이브 ${G.wave + 1} 시작 (${Math.ceil(G.countdown)})` : `웨이브 ${G.wave + 1} 시작`); wb.disabled = false; }
+  if (G.over) { setText(wb, G.won ? '클리어!' : '패배'); wb.disabled = true; }
+  else if (G.inWave) { setText(wb, `라운드 ${G.round} 진행 중`); wb.disabled = true; }
+  else { setText(wb, G.countdown > 0 ? `라운드 ${G.round + 1} 시작 (${Math.ceil(G.countdown)})` : `라운드 ${G.round + 1} 시작`); wb.disabled = false; }
   $('cdFill').style.width = G.countdown > 0 ? `${G.countdown / CFG.waveGapSec * 100}%` : '0%';
   setText($('speedBtn'), `${G.speed}x`);
   setText($('pauseBtn'), G.paused ? '▶' : '⏸');
 
   for (const [id, el] of Object.entries(bcards)) {
+    const lock = buildLock(id);
     el.classList.toggle('sel', G.build === id);
-    el.classList.toggle('no', G.money < TOWERS[id].cost);
+    el.classList.toggle('no', !!lock || !canAfford(id));
+    setText(el.querySelector('.lock'), lock);
   }
 
   const info = $('info');
   if (G.sel) {
     info.classList.remove('hidden');
-    const t = G.sel;
-    setText($('infoName'), `${t.hidden ? t.hidden.icon + ' ' + t.hidden.name : t.def.icon + ' ' + t.def.name}  Lv.${t.lv}${t.lv >= CFG.maxLv ? ' (MAX)' : ''}`);
+    const t = G.sel, d = t.def;
+    const nm = d.money ? `${MONEY_TIERS[t.tier].icon} 돈타워 · ${MONEY_TIERS[t.tier].name} (${t.tier + 1}단)` : `${d.icon} ${d.name}${d.dmg ? `  ${t.lv}단` : ''}`;
+    setText($('infoName'), nm);
     setText($('infoStats'), towerInfo(t));
-    const ub = $('upBtn');
-    if (t.lv >= CFG.maxLv) { setText(ub, '최대 레벨'); ub.disabled = true; }
-    else { const c = upCost(t); setText(ub, `강화 ${c}G (U)`); ub.disabled = G.money < c; }
-    setText($('sellBtn'), `판매 +${Math.floor(t.invested * CFG.sellRate)}G (S)`);
+    for (const a of infoActs) { setText(a.b, a.label()); a.b.disabled = !a.enabled(); }
   } else info.classList.add('hidden');
 
-  // 다음 웨이브 미리보기
-  const nw = G.inWave ? G.wave : G.wave + 1;
-  const el = eligible(nw);
-  let html = `<b>웨이브 ${nw}</b> 출현: ` + el.map(d => `<span class="${d.from === nw ? 'new' : ''}" title="${d.name}">${d.icon}${d.from === nw ? 'NEW' : ''}</span>`).join(' ');
-  if (nw % CFG.bossEvery === 0) { const b = BOSSES[(nw / CFG.bossEvery - 1) % BOSSES.length]; html += `<br><span class="boss">⚠ 보스: ${b.icon} ${b.name}</span>`; }
-  else html += `<br>다음 보스: 웨이브 ${Math.ceil(nw / CFG.bossEvery) * CFG.bossEvery}`;
-  const soon = ENEMY_LIST.find(d => d.from > nw);
-  if (soon) html += ` · 신규 ${soon.icon} W${soon.from}`;
-  setHTML($('nextWave'), html);
+  const nr = G.inWave ? G.round : G.round + 1;
+  if (nr <= CFG.rounds) {
+    const k = roundKind(nr);
+    let html = `<b>라운드 ${nr}</b>: ${k.icon} ${k.name}`;
+    if (k.final) html += ` <span class="boss">최종 보스</span>`;
+    else if (k.boss) html += ` <span class="boss">보스 (목재 +${CFG.bossLumber})</span>`;
+    else if (k.air) html += ` <span class="air">공중 — 대공 타워 필요</span>`;
+    if (!k.boss && nr % CFG.lumberEvery === 0) html += ` <span class="wood">🪵 목재 라운드</span>`;
+    const nextAir = ROUNDS.findIndex((x, i) => i > nr && x && KINDS[x].air);
+    const nextBoss = ROUNDS.findIndex((x, i) => i > nr && x && KINDS[x].boss);
+    html += `<br>다음 공중: ${nextAir > 0 ? 'R' + nextAir : '-'} · 다음 보스: ${nextBoss > 0 ? 'R' + nextBoss : '-'}`;
+    setHTML($('nextWave'), html);
+  }
 }
 
 /* ---------- 메인 / 상점 ---------- */
 function show(id) { for (const s of document.querySelectorAll('.screen')) s.classList.toggle('on', s.id === id); if (id === 'game') fit(); }
-function refreshMenu() { $('mBest').textContent = save.best; $('mBars').textContent = save.bars; $('mRuns').textContent = save.runs; }
+function refreshMenu() { $('mBest').textContent = save.best; $('mClears').textContent = save.clears; $('mBars').textContent = save.bars; $('mRuns').textContent = save.runs; }
 const metaEls = {};
 for (const m of META) {
   const el = document.createElement('div'); el.className = 'meta';
@@ -902,12 +995,10 @@ $('shopBack').onclick = () => { refreshMenu(); show('menu'); };
 $('againBtn').onclick = () => { newGame(); };
 $('toMenuBtn').onclick = () => { G = null; refreshMenu(); show('menu'); };
 $('resumeBtn').onclick = () => togglePause(false);
-$('quitBtn').onclick = () => { $('pauseOv').classList.remove('on'); gameOver(); };
+$('quitBtn').onclick = () => { $('pauseOv').classList.remove('on'); finish(false); };
 $('waveBtn').onclick = () => startWave();
 $('speedBtn').onclick = () => { G.speed = G.speed >= 3 ? 1 : G.speed + 1; };
 $('pauseBtn').onclick = () => togglePause();
-$('upBtn').onclick = () => upgradeTower(G.sel);
-$('sellBtn').onclick = () => sellTower(G.sel);
 function togglePause(v) {
   if (!G || G.over) return;
   G.paused = v === undefined ? !G.paused : v;
@@ -928,16 +1019,19 @@ cv.addEventListener('click', ev => {
   if (G.build) { placeTower(c, r, G.build); return; }
   selectTower(G.grid[cellKey(c, r)] || null);
 });
-cv.addEventListener('contextmenu', ev => { ev.preventDefault(); if (G) { selectBuild(null); selectTower(null); } });
+cv.addEventListener('contextmenu', ev => { ev.preventDefault(); if (G) { G.build = null; selectTower(null); } });
 window.addEventListener('keydown', ev => {
   if (!G || !$('game').classList.contains('on')) return;
   const k = ev.key.toLowerCase();
   if (k === 'p') { togglePause(); return; }
   if (G.over || G.paused) return;
-  const t = Object.entries(TOWERS).find(([, d]) => d.key === ev.key);
-  if (t) selectBuild(G.build === t[0] ? null : t[0]);
+  if (/^[1-6]$/.test(k)) {
+    const ids = Object.entries(TOWERS).filter(([, d]) => d.tab === G.tab).map(([id]) => id);
+    const id = ids[+k - 1]; if (id) selectBuild(G.build === id ? null : id);
+  }
+  else if (k === 'tab') { ev.preventDefault(); const i = TABS.findIndex(t => t.id === G.tab); G.tab = TABS[(i + 1) % TABS.length].id; renderBuildList(); }
   else if (k === ' ') { ev.preventDefault(); startWave(); }
-  else if (k === 'escape') { selectBuild(null); selectTower(null); }
+  else if (k === 'escape') { G.build = null; selectTower(null); }
   else if (k === 'u') upgradeTower(G.sel);
   else if (k === 's') sellTower(G.sel);
   else if (k === 'f') G.speed = G.speed >= 3 ? 1 : G.speed + 1;
@@ -957,7 +1051,7 @@ function loop(now) {
   if (G && $('game').classList.contains('on')) {
     if (!G.paused && !G.over) {
       // 대기 카운트다운은 배속과 무관하게 실제 시간으로
-      if (!G.inWave && G.wave > 0 && G.countdown > 0) { G.countdown -= real; if (G.countdown <= 0) startWave(); }
+      if (!G.inWave && G.round > 0 && G.countdown > 0) { G.countdown -= real; if (G.countdown <= 0) startWave(); }
       let dt = real * G.speed;
       while (dt > 0) { const s = Math.min(dt, 1 / 60); update(s); dt -= s; if (G.over) break; }
     }
