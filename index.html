@@ -125,10 +125,10 @@ button{font-family:inherit;cursor:pointer}
 <!-- ===================== 메인 ===================== -->
 <section id="menu" class="screen on">
   <div class="logo">💰 MONEY DEFENSE<br><span style="font-size:30px">돈타워 디펜스 · 초기 버전</span></div>
-  <div class="sub">돈을 버는 건물을 지어 돈을 벌고, 그 돈으로 45라운드를 막아라</div>
+  <div class="sub">돈을 버는 건물을 지어 돈을 벌고, 그 돈으로 끝없는 라운드를 버텨라</div>
   <div class="mstats">
     <div class="mstat"><b id="mBest">0</b><span>최고 라운드</span></div>
-    <div class="mstat"><b id="mClears">0</b><span>클리어</span></div>
+    <div class="mstat"><b id="mClears">0</b><span>최다 처치</span></div>
     <div class="mstat"><b id="mPlays">0</b><span>플레이</span></div>
   </div>
   <button class="big" id="goBtn">게임 시작</button>
@@ -139,7 +139,7 @@ button{font-family:inherit;cursor:pointer}
     ③ <b>옵션타워</b>를 지어 슬로우·공속업·스턴·멀티샷·장거리 중 하나로 바꾸세요. <b>슬로우는 필수</b>입니다.<br>
     ④ <b>타워 연구소</b>: 노동자 고용, 목재 구입, 공격력 연구, 영웅(옆집 아줌마·딸내미·공익근무요원·동네 아저씨) 소환.
     동네 아저씨는 <b>흡연구역</b> 밖에선 버티지 못합니다.<br>
-    ⑤ 5라운드마다 <b>목재 타임</b> · 식량 51 이상이면 <b>유지비</b>로 수입이 줄어듭니다 · 공중 라운드 주의!<br>
+    ⑤ 라운드는 <b>끝없이</b> 이어집니다. 몹을 하나라도 놓치면 그 라운드를 <b>못 깬 것</b>이라 같은 라운드 몬스터가 다시 나옵니다. 45라운드부터 15라운드마다 보스.<br>⑥ 5라운드마다 <b>목재 타임</b> · 식량 51 이상이면 <b>유지비</b>로 수입이 줄어듭니다 · 공중 라운드 주의!<br>
     조작: 좌클릭 선택 · 우클릭 이동/취소 · 명령 카드 단축키(Q W E R / A S D F / Z X C V, 업그레이드 U) · Space 다음 라운드 · F 배속 · P/F10 일시정지
   </div>
 </section>
@@ -161,7 +161,7 @@ button{font-family:inherit;cursor:pointer}
     <div id="kills">
       <h4>Kills</h4>
       <div class="row me"><span>[하수] 나</span><b id="kKills">0</b></div>
-      <div class="row"><span>라운드</span><b id="kRound">0 / 45</b></div>
+      <div class="row"><span>라운드</span><b id="kRound">0</b></div>
       <div class="row lv"><span>라이프</span><b id="kLives">20</b></div>
       <div class="row"><span id="kNextLbl">다음 라운드</span><b id="kNext">-</b></div>
       <div class="row"><span>초당 돈타워 수입</span><b id="kIps" style="color:#ffe28a">0</b></div>
@@ -196,7 +196,9 @@ button{font-family:inherit;cursor:pointer}
 const T = 32, COLS = 36, ROWS = 20, W = COLS * T, H = ROWS * T;
 
 const CFG = {
-  startGold: 2100, startLumber: 100, lives: 20, rounds: 45,
+  startGold: 2100, startLumber: 100, lives: 20,
+  bossEvery: 15, bossFrom: 45,   // 45라운드부터 15라운드마다 보스 (라운드는 끝없이 이어진다)
+  bossLeak: 5,                   // 보스가 빠져나가면 라이프 -5
   foodCap: 100,
   firstWait: 30,          // 첫 라운드까지 준비 시간
   roundGap: 12,           // 라운드 정리 후 다음 라운드까지
@@ -210,7 +212,7 @@ const CFG = {
   speed: r => 72 + r * 0.9,
   count: 20, airCount: 16, airSpeed: 1.6,   // 공중 몹은 길 위를 빠르게 날아간다
   finalHpMul: 25,
-  airRounds: [9, 17, 26, 33, 39, 42],
+  airRounds: [9, 17, 26, 33, 39, 42],   // 45라운드 이후는 8라운드마다 (49, 57, 65 …)
   spawnGap: 0.9,
 };
 // 유지비: 식량 사용량에 따른 수입 비율 (원작 툴팁 그대로)
@@ -302,7 +304,7 @@ const PATH = [[2,-1],[2,17],[6,17],[6,4],[10,4],[10,17],[14,17],[14,4],[18,4],[1
    저장
    ===================================================================== */
 const SAVE_KEY = 'moneydefense.v3';
-let save = { best:0, clears:0, plays:0 };
+let save = { best:0, clears:0, plays:0 };   // clears = 한 판 최다 처치 수
 try { const s = JSON.parse(localStorage.getItem(SAVE_KEY)); if (s) save = Object.assign(save, s); } catch (e) {}
 const persist = () => { try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch (e) {} };
 
@@ -379,18 +381,22 @@ function afford(cost, food) {
 function pay(cost) { cost = cost || {}; G.gold -= cost.g || 0; G.lumber -= cost.l || 0; }
 
 /* ---------- 라운드 ---------- */
-const isAir = r => CFG.airRounds.includes(r);
-const isFinal = r => r === CFG.rounds;
+const isAir = r => CFG.airRounds.includes(r) || (r > 45 && r % 8 === 1);
+const isFinal = r => r >= CFG.bossFrom && (r - CFG.bossFrom) % CFG.bossEvery === 0;
 const MOB_ICONS = ['🐺','🐗','🦂','🐻','🧟','🦎','👹','🦍','🐊','🦏','🐂','🦖'];
 const AIR_ICONS = ['🦇','🦅','🐉','🛸','🦉','🐲'];
 function startRound() {
-  if (!G || G.inRound || G.over || G.round >= CFG.rounds) return;
-  G.round++; G.inRound = true; G.wait = -1; G.spawnT = 0;
+  if (!G || G.inRound || G.over) return;
+  // 성지키기 방식: 못 막은 라운드는 같은 몬스터가 다시 나온다
+  if (G.repeat) G.repeat = false; else G.round++;
+  G.retry = G.round === G.lastFailed ? (G.retry || 0) + 1 : 0;
+  G.inRound = true; G.wait = -1; G.spawnT = 0; G.roundLeaks = 0;
   const r = G.round, air = isAir(r), fin = isFinal(r);
   const n = fin ? 1 : air ? CFG.airCount : CFG.count;
   G.queue = Array.from({ length: n }, () => ({ air, fin }));
   const tags = [];
-  if (fin) tags.push('최종 라운드');
+  if (fin) tags.push('보스');
+  if (G.retry) tags.push(`재도전 ${G.retry}`);
   if (air) tags.push('공중');
   if (r % CFG.lumberRound === 0) tags.push('목재 타임');
   banner(`${r} 라운드${tags.length ? ' — ' + tags.join(' · ') : ''}`);
@@ -399,8 +405,13 @@ function startRound() {
 }
 function endRound() {
   G.inRound = false;
-  if (G.round > save.best) { save.best = G.round; persist(); }
-  if (G.round >= CFG.rounds) { finish(true); return; }
+  if (G.roundLeaks > 0) {
+    G.repeat = true; G.lastFailed = G.round;
+    msg(`${G.round} 라운드를 막지 못했습니다! 같은 라운드 몬스터가 다시 나옵니다.`, '#ff9a3d');
+  } else {
+    if (G.round > save.best) { save.best = G.round; persist(); }
+    if (G.retry) msg(`${G.round} 라운드 돌파!`, '#46e05a');
+  }
   G.wait = CFG.roundGap;
 }
 function spawnMob(q) {
@@ -554,9 +565,9 @@ function update(dt) {
     else m.dist += m.spd * (1 - m.slowA) * (1 - m.slowB) * dt;
     if (m.dist >= PATH_LEN) {
       m.dead = true; G.stats.leaks++;
-      const loss = m.fin ? G.lives : 1;
-      G.lives -= loss;
-      msg(m.fin ? '최종 보스가 중앙에 도달했습니다!' : `${m.round} 라운드 몹이 빠져나갔습니다. 라이프 -${loss}`, '#ff5050');
+      const loss = m.fin ? CFG.bossLeak : 1;
+      G.lives -= loss; G.roundLeaks++;
+      msg(`${m.round} 라운드 ${m.fin ? '보스가' : '몹이'} 빠져나갔습니다. 라이프 -${loss}`, '#ff5050');
     }
     const p = posAt(m.dist); m.x = p.x; m.y = p.y - (m.air ? 10 : 0);
   }
@@ -608,11 +619,12 @@ function update(dt) {
 }
 function finish(win) {
   if (G.over) return;
-  G.over = true; G.won = win; G.paused = false;
-  save.plays++; save.best = Math.max(save.best, G.round); if (win) save.clears++; persist();
-  $('overTitle').textContent = win ? '🎉 승리!' : '💀 패배';
+  G.over = true; G.won = false; G.paused = false;
+  const cleared = G.round - (G.inRound || G.repeat ? 1 : 0);
+  save.plays++; save.best = Math.max(save.best, cleared); save.clears = Math.max(save.clears, G.kills); persist();
+  $('overTitle').textContent = '💀 게임 오버';
   $('overRows').innerHTML =
-    `도달 라운드 <b>${G.round} / ${CFG.rounds}</b><br>처치 <b>${fmt(G.kills)}</b><br>놓친 몹 <b>${G.stats.leaks}</b><br>` +
+    `돌파한 라운드 <b>${cleared}</b><br>처치 <b>${fmt(G.kills)}</b><br>놓친 몹 <b>${G.stats.leaks}</b><br>` +
     `돈타워 수입 <b>${fmt(G.stats.money)}</b><br>동네 아저씨 삥 <b>${fmt(G.stats.extort)}</b><br>목재 타임 수입 <b>${fmt(G.stats.lumber)}</b><br>` +
     `플레이 시간 <b>${Math.floor(G.time / 60)}분 ${Math.floor(G.time % 60)}초</b>`;
   $('overOv').classList.add('on');
@@ -986,9 +998,9 @@ function refreshUI() {
   setText($('foodTxt'), `${f}/${CFG.foodCap}`);
   const ut = $('upkeepTxt'); setText(ut, uk.name); ut.style.color = uk.color;
   setText($('orbTxt'), String(G.round));
-  setText($('roundTxt'), G.inRound ? `${G.round} 라운드 진행 중` : G.round >= CFG.rounds ? '종료' : G.round === 0 ? `준비 시간 ${Math.max(0, Math.ceil(G.wait))}초` : `다음 라운드 ${Math.max(0, Math.ceil(G.wait))}초`);
+  setText($('roundTxt'), G.inRound ? `${G.round} 라운드 진행 중` : G.round === 0 ? `준비 시간 ${Math.max(0, Math.ceil(G.wait))}초` : `다음 라운드 ${Math.max(0, Math.ceil(G.wait))}초`);
   setText($('kKills'), fmt(G.kills));
-  setText($('kRound'), `${G.round} / ${CFG.rounds}`);
+  setText($('kRound'), `${G.round}${G.retry && G.inRound ? ` (재도전 ${G.retry})` : G.repeat ? ' (재도전)' : ''}`);
   setText($('kLives'), String(G.lives));
   setText($('kNext'), G.inRound ? `${G.mobs.length + G.queue.length}마리` : `${Math.max(0, Math.ceil(G.wait))}초`);
   setText($('kNextLbl'), G.inRound ? '남은 몹' : '다음 라운드');
