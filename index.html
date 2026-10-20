@@ -48,6 +48,7 @@ button{font-family:inherit;cursor:pointer}
 .res b{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
 #goldTxt{color:#ffe28a} #lumberTxt{color:#9ae58c} #foodTxt{color:#f0c79a}
 #upkeepTxt{min-width:96px;text-align:center;font-weight:700;font-size:12px}
+.brk{display:none}
 
 #stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;min-height:0;background:#000}
 #cv{display:block}
@@ -115,8 +116,24 @@ button{font-family:inherit;cursor:pointer}
   #portrait{width:90px}
   #card{width:100%;height:150px}
   .res{min-width:0}
-  #kills{display:none}
-  #tip{bottom:auto;top:40px}
+  #tip{bottom:auto;top:76px}
+  /* 휴대폰: 상단 바를 두 줄로 — 1줄 자원, 2줄 버튼·라운드 */
+  #topbar{height:auto;flex-wrap:wrap;padding:4px 6px;gap:4px}
+  #topbar .res,#upkeepTxt,.brk{order:1}
+  .brk{display:block;flex-basis:100%;height:0}
+  #topbar .tb,#roundOrb{order:2}
+  .res{flex:1 1 0;padding:2px 6px;gap:3px}
+  .res b{font-size:13px}
+  #upkeepTxt{min-width:0;font-size:11px;flex:none}
+  .tb{padding:3px 8px}
+  .tb .hk{display:none}
+  #roundOrb{margin:0 0 0 auto;gap:6px;font-size:12px;white-space:nowrap;min-width:0;overflow:hidden}
+  #roundTxt{overflow:hidden;text-overflow:ellipsis}
+  #roundOrb .orb{width:22px;height:22px;font-size:11px}
+  #kills{right:4px;top:4px;min-width:0;padding:4px 7px;font-size:11px}
+  #kills h4,#kills .me,#kills .ips{display:none}
+  #kills .row{gap:8px;line-height:1.4}
+  .msg{font-size:12px}
 }
 </style>
 </head>
@@ -147,14 +164,15 @@ button{font-family:inherit;cursor:pointer}
 <!-- ===================== 게임 ===================== -->
 <section id="game" class="screen">
   <div id="topbar">
-    <button class="tb" id="menuBtn">메뉴 (F10)</button>
-    <button class="tb" id="speedBtn">배속 1x (F)</button>
-    <button class="tb" id="nextBtn">다음 라운드 (Space)</button>
+    <button class="tb" id="menuBtn">메뉴<span class="hk"> (F10)</span></button>
+    <button class="tb" id="speedBtn"><span id="speedTxt">1x</span><span class="hk"> 배속 (F)</span></button>
+    <button class="tb" id="nextBtn">다음 라운드<span class="hk"> (Space)</span></button>
     <div id="roundOrb"><div class="orb" id="orbTxt">0</div><span id="roundTxt">준비 시간</span></div>
     <div class="res" title="골드">🪙<b id="goldTxt">0</b></div>
     <div class="res" title="목재">🌲<b id="lumberTxt">0</b></div>
     <div class="res" title="식량">🍗<b id="foodTxt">0/100</b></div>
     <div id="upkeepTxt">유지비 없음</div>
+    <div class="brk"></div>
   </div>
   <div id="stage">
     <canvas id="cv"></canvas>
@@ -164,7 +182,7 @@ button{font-family:inherit;cursor:pointer}
       <div class="row"><span>라운드</span><b id="kRound">0</b></div>
       <div class="row lv"><span>필드 몹</span><b id="kLives">0 / 50</b></div>
       <div class="row"><span id="kNextLbl">다음 라운드</span><b id="kNext">-</b></div>
-      <div class="row"><span>초당 돈타워 수입</span><b id="kIps" style="color:#ffe28a">0</b></div>
+      <div class="row ips"><span>초당 돈타워 수입</span><b id="kIps" style="color:#ffe28a">0</b></div>
     </div>
     <div id="msgs"></div>
     <div id="banner"></div>
@@ -685,17 +703,23 @@ function buildCmd(slot, id) {
   return cmd(slot, { id: 'b_' + id, icon: d.icon, name: `${d.name} 건설`, cost: d.cost, food: d.food, desc: d.desc,
     req: () => reqText(d.req), ok: () => !buildBlock(id), run: () => { G.placing = id; msg(`${d.name}: 지을 곳을 클릭하세요 (Shift+클릭 연속 건설, 우클릭 취소)`, '#cfd7de'); } });
 }
+function moveCmd(slot, u) {
+  return cmd(slot, { id: 'move', hot: 'M', icon: '🦶', name: '이동', desc: '누른 뒤 맵의 원하는 곳을 클릭(터치)하면 그곳으로 이동합니다. PC에서는 우클릭으로도 이동할 수 있습니다.',
+    ok: () => true, run: () => { G.moveMode = u; msg('이동할 곳을 클릭(터치)하세요.', '#cfd7de'); } });
+}
 function cardFor(sel) {
   const cs = [];
   if (!sel || (sel.isUnit && sel.def.worker)) {
     cs.push(buildCmd(0, 's1'), buildCmd(1, 'm1'), buildCmd(2, 'opt'), buildCmd(3, 'lab'),
             buildCmd(4, 'yang'), buildCmd(5, 'smoke'), buildCmd(6, 'store'));
+    if (sel) cs.push(moveCmd(11, sel));
     return cs;
   }
   if (sel.isMob) return cs;
   const d = sel.def;
   if (sel.isUnit) {
     if (d.next) cs.push(cmd(0, { id: 'u_up', hot: 'U', icon: D[d.next].icon, name: `${D[d.next].name}(으)로 업그레이드`, cost: d.up, desc: D[d.next].desc, ok: () => !afford(d.up), run: () => upgradeUnit(sel) }));
+    cs.push(moveCmd(10, sel));
     cs.push(cmd(11, { id: 'u_stop', icon: '✋', name: '정지', desc: '이동을 멈춥니다. 우클릭으로 이동시킬 수 있습니다.', ok: () => true, run: () => { sel.tx = sel.x; sel.ty = sel.y; } }));
     return cs;
   }
@@ -1002,7 +1026,7 @@ function refreshUI() {
   setText($('kNext'), G.inRound ? `소환 중 ${G.queue.length}` : G.held ? '멈춤' : `${Math.max(0, Math.ceil(G.wait))}초`);
   setText($('kNextLbl'), '다음 라운드');
   setText($('kIps'), (G.income.reduce((a, x) => a + x[1], 0) / 10).toFixed(1));
-  setText($('speedBtn'), `배속 ${G.speed}x (F)`);
+  setText($('speedTxt'), `${G.speed}x`);
   $('nextBtn').disabled = G.inRound || G.over || G.held;
 
   const s = G.sel;
@@ -1038,8 +1062,8 @@ function refreshUI() {
     if (d.growth) L.push(`처치 ${s.kills} → 공격력 +${Math.round(s.kills * d.growth * 100)}%`);
     if (d.extort) L.push(`공갈협박: 피해의 ${d.extort * 100}%를 돈으로`);
     if (d.needZone) L.push(inZone(s) ? '🚬 흡연구역 안 — 정상' : '🚭 흡연구역 밖 — 체력이 줄고 공격하지 않습니다!');
-    if (d.worker) L.push(`이 노동자를 때리는 타워 ${G.blds.filter(b => b.target === s).length}개 · 우클릭으로 이동`);
-    if (d.hero) L.push('우클릭으로 이동');
+    if (d.worker) L.push(`이 노동자를 때리는 타워 ${G.blds.filter(b => b.target === s).length}개 · 이동(M) 또는 우클릭으로 이동`);
+    if (d.hero) L.push('이동(M) 또는 우클릭으로 이동');
     if (d.lab && G.labQueue.length) L.push('대기열: ' + G.labQueue.map(q => q.label).join(' → '));
     extra = L.join('\n');
     if (s.buildLeft > 0) prg = { t: s.upTo ? `${D[s.upTo].name} 업그레이드 중` : '건설 중', k: 1 - s.buildLeft / s.buildTotal };
@@ -1068,6 +1092,11 @@ cv.addEventListener('mouseleave', () => { if (G) G.hover = null; });
 cv.addEventListener('click', ev => {
   if (!G || G.over || G.paused) return;
   const p = toWorld(ev);
+  if (G.moveMode) {
+    const u = G.moveMode; G.moveMode = null;
+    if (!u.dead) { u.tx = Math.max(10, Math.min(W - 10, p.x)); u.ty = Math.max(10, Math.min(H - 10, p.y)); G.fx.push({ ring: true, x: p.x, y: p.y, r: 10, life: .4, max: .4, color: '#46e05a' }); }
+    return;
+  }
   if (G.placing) {
     const ok = tryBuild(G.placing, Math.floor(p.x / T), Math.floor(p.y / T));
     if (ok && !ev.shiftKey) G.placing = null;
@@ -1077,7 +1106,7 @@ cv.addEventListener('click', ev => {
 });
 cv.addEventListener('contextmenu', ev => {
   ev.preventDefault(); if (!G) return;
-  if (G.placing) { G.placing = null; return; }
+  if (G.placing || G.moveMode) { G.placing = null; G.moveMode = null; return; }
   const p = toWorld(ev);
   if (G.sel && G.sel.isUnit) {
     G.sel.tx = Math.max(10, Math.min(W - 10, p.x)); G.sel.ty = Math.max(10, Math.min(H - 10, p.y));
@@ -1090,7 +1119,7 @@ window.addEventListener('keydown', ev => {
   if (k === 'p' || ev.key === 'F10') { ev.preventDefault(); togglePause(); return; }
   if (G.over || G.paused) return;
   if (k === ' ') { ev.preventDefault(); if (!G.inRound) startRound(); return; }
-  if (k === 'escape') { G.placing = null; G.sel = null; return; }
+  if (k === 'escape') { G.placing = null; G.moveMode = null; G.sel = null; return; }
   if (k === 'f') { G.speed = G.speed >= 3 ? 1 : G.speed + 1; return; }
   const c = cardCmds.find(x => x.hot.toLowerCase() === k);
   if (c) runCmd(c);
